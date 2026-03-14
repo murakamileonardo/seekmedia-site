@@ -1,4 +1,5 @@
 export const NAV_LINKS = [
+  { label: "Simulador", href: "/simulador" },
   { label: "Sobre", href: "/sobre" },
   { label: "Casting", href: "/casting" },
   { label: "Cases", href: "/cases" },
