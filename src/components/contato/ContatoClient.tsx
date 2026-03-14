@@ -190,8 +190,8 @@ export function ContatoClient() {
           </form>
 
           {/* Info sidebar */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+          <div className="lg:col-span-2 flex flex-col gap-6">
+            <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 flex-1">
               <h3 className="text-lg font-semibold mb-4">Informações</h3>
               <div className="space-y-4">
                 <InfoItem
