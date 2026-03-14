@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SeekMedia — Sitemap & Wireframe</title>
+<style>
+  :root {
+    --bg: #0F0F14;
+    --surface: #1A1A24;
+    --surface2: #22222E;
+    --border: #2E2E3A;
+    --text: #E4E4EC;
+    --muted: #8888A0;
+    --accent: #A78BFA;
+    --accent2: #6D28D9;
+    --pink: #F472B6;
+    --green: #34D399;
+    --orange: #FB923C;
+    --blue: #60A5FA;
+    --cyan: #22D3EE;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, system-ui, sans-serif; line-height: 1.6; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+
+  /* Header */
+  .header { text-align: center; padding: 60px 0 40px; border-bottom: 1px solid var(--border); margin-bottom: 48px; }
+  .header .badge { display: inline-block; background: var(--accent2); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 2px; padding: 6px 16px; border-radius: 20px; margin-bottom: 20px; text-transform: uppercase; }
+  .header h1 { font-size: 42px; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
+  .header p { color: var(--muted); font-size: 16px; max-width: 600px; margin: 0 auto; }
+
+  /* Section titles */
+  .section-title { font-size: 28px; font-weight: 700; margin: 48px 0 8px; }
+  .section-sub { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+
+  /* Sitemap tree */
+  .sitemap { display: flex; flex-direction: column; align-items: center; gap: 24px; margin-bottom: 48px; }
+  .sitemap-level { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .sitemap-node { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 22px; text-align: center; min-width: 140px; transition: all .2s; cursor: default; }
+  .sitemap-node:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .sitemap-node.home { background: var(--accent2); border-color: var(--accent); }
+  .sitemap-node.home .node-name { color: #fff; }
+  .sitemap-node .node-name { font-weight: 600; font-size: 14px; }
+  .sitemap-node .node-desc { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .sitemap-node.home .node-desc { color: rgba(255,255,255,.7); }
+  .sitemap-connector { width: 2px; height: 24px; background: var(--border); margin: 0 auto; }
+  .sitemap-hline { height: 2px; background: var(--border); width: 80%; margin: 0 auto; }
+
+  /* Wireframe page card */
+  .page-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 32px; overflow: hidden; }
+  .page-header { padding: 20px 28px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 14px; }
+  .page-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: #fff; flex-shrink: 0; }
+  .page-header h3 { font-size: 20px; font-weight: 700; }
+  .page-header .page-url { color: var(--muted); font-size: 12px; font-family: monospace; }
+  .page-body { padding: 24px 28px; }
+
+  /* Wireframe sections */
+  .wire-section { background: var(--surface2); border: 1px dashed var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 14px; position: relative; }
+  .wire-section:last-child { margin-bottom: 0; }
+  .wire-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); margin-bottom: 8px; }
+  .wire-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .wire-desc strong { color: var(--text); }
+  .wire-elements { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .wire-el { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px; font-size: 11px; color: var(--muted); }
+  .wire-el.cta { background: var(--accent2); border-color: var(--accent); color: #fff; }
+  .wire-el.input { border-style: dashed; }
+
+  /* Feature flags */
+  .features { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 8px; }
+  .feat { font-size: 11px; padding: 4px 10px; border-radius: 6px; font-weight: 600; }
+  .feat.nocode { background: rgba(52,211,153,.15); color: var(--green); }
+  .feat.filter { background: rgba(96,165,250,.15); color: var(--blue); }
+  .feat.seo { background: rgba(251,146,60,.15); color: var(--orange); }
+  .feat.api { background: rgba(167,139,250,.15); color: var(--accent); }
+  .feat.responsive { background: rgba(244,114,182,.15); color: var(--pink); }
+
+  /* Notes */
+  .note { background: rgba(167,139,250,.08); border-left: 3px solid var(--accent); padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 20px 0; font-size: 13px; color: var(--muted); }
+  .note strong { color: var(--accent); }
+
+  /* Tech stack */
+  .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 20px 0; }
+  .tech-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .tech-item .tech-name { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+  .tech-item .tech-why { font-size: 12px; color: var(--muted); }
+
+  /* Summary table */
+  .summary-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+  .summary-table th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); padding: 10px 14px; border-bottom: 2px solid var(--border); }
+  .summary-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .summary-table tr:hover { background: var(--surface2); }
+  .status { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .status.essential { background: var(--green); }
+  .status.nice { background: var(--orange); }
+  .status.future { background: var(--muted); }
+
+  @media (max-width: 700px) {
+    .header h1 { font-size: 28px; }
+    .sitemap-level { flex-direction: column; align-items: center; }
+    .page-header, .page-body { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="badge">Sitemap & Wireframe</div>
+    <h1>SeekMedia</h1>
+    <p>Agência de influenciadores e produção audiovisual — Mapa do site e estrutura de cada página</p>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SITEMAP -->
+  <!-- ════════════════════════════════════════ -->
+  <h2 class="section-title">Mapa do Site (Sitemap)</h2>
+  <p class="section-sub">Todas as páginas e como elas se conectam</p>
+
+  <div class="sitemap">
+    <div class="sitemap-level">
+      <div class="sitemap-node home">
+        <div class="node-name">Home</div>
+        <div class="node-desc">Página principal</div>
+      </div>
+    </div>
+    <div class="sitemap-connector"></div>
+    <div class="sitemap-hline"></div>
+    <div class="sitemap-level">
+      <div class="sitemap-node">
+        <div class="node-name">Simulador</div>
+        <div class="node-desc">Calculadora de campanhas</div>
+      </div>
+      <div class="sitemap-node">
+        <div class="node-name">Sobre</div>
+        <div class="node-desc">A agência</div>
+      </div>
+      <div class="sitemap-node">
+        <div class="node-name">Casting</div>
+        <div class="node-desc">Catálogo de influenciadores</div>
+      </div>
+      <div class="sitemap-node">
+        <div class="node-name">Cases</div>
+        <div class="node-desc">Portfólio e resultados</div>
+      </div>
+      <div class="sitemap-node">
+        <div class="node-name">Serviços</div>
+        <div class="node-desc">O que oferecemos</div>
+      </div>
+      <div class="sitemap-node">
+        <div class="node-name">Contato</div>
+        <div class="node-desc">Fale conosco</div>
+      </div>
+    </div>
+    <div class="sitemap-connector"></div>
+    <div class="sitemap-hline"></div>
+    <div class="sitemap-level">
+      <div class="sitemap-node">
+        <div class="node-name">Perfil do Influenciador</div>
+        <div class="node-desc">Página individual</div>
+      </div>
+      <div class="sitemap-node">
+        <div class="node-name">Case Detail</div>
+        <div class="node-desc">Detalhe do case</div>
+      </div>
+      <div class="sitemap-node">
+        <div class="node-name">Painel Admin</div>
+        <div class="node-desc">Cadastro de influenciadores</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Total: 10 páginas</strong> — 7 públicas + 1 página dinâmica de perfil + 1 página dinâmica de case + 1 painel administrativo (acesso restrito).
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- PAGE WIREFRAMES -->
+  <!-- ════════════════════════════════════════ -->
+  <h2 class="section-title">Wireframe por Página</h2>
+  <p class="section-sub">Estrutura seção por seção — o que cada parte faz</p>
+
+  <!-- ──────────── HOME ──────────── -->
+  <div class="page-card">
+    <div class="page-header">
+      <div class="page-icon" style="background: linear-gradient(135deg, var(--accent2), var(--pink));">H</div>
+      <div>
+        <h3>Home</h3>
+        <div class="page-url">/</div>
+      </div>
+    </div>
+    <div class="page-body">
+      <div class="wire-section">
+        <div class="wire-label">Navbar</div>
+        <div class="wire-desc">Logo SeekMedia à esquerda. Menu: Sobre, Casting, Cases, Serviços, Contato. <strong>Botão CTA "Fale Conosco"</strong> em destaque à direita. Menu hambúrguer no celular.</div>
+        <div class="wire-elements">
+          <span class="wire-el">Logo</span>
+          <span class="wire-el">Links de navegação</span>
+          <span class="wire-el cta">Fale Conosco</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Hero Section</div>
+        <div class="wire-desc">Tela cheia com <strong>vídeo de fundo ou animação 3D</strong> (do Passo 3 do guia). Título grande e impactante tipo: "Conectamos marcas aos maiores criadores do Brasil". Subtítulo curto explicando o que a SeekMedia faz. Dois botões: <strong>"Conheça Nosso Casting"</strong> e <strong>"Quero um Orçamento"</strong>.</div>
+        <div class="wire-elements">
+          <span class="wire-el">Vídeo/Animação fullscreen</span>
+          <span class="wire-el">Headline</span>
+          <span class="wire-el">Subtítulo</span>
+          <span class="wire-el cta">Ver Casting</span>
+          <span class="wire-el cta">Pedir Orçamento</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Barra de Logos de Clientes</div>
+        <div class="wire-desc"><strong>Carrossel horizontal automático</strong> com logos das marcas parceiras. Fundo neutro, logos em escala de cinza que ficam coloridos no hover. Texto acima: "Marcas que confiam na SeekMedia".</div>
+        <div class="wire-elements">
+          <span class="wire-el">Título da seção</span>
+          <span class="wire-el">Carrossel infinito de logos</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Destaques do Casting</div>
+        <div class="wire-desc">Grid com <strong>6 a 8 influenciadores em destaque</strong>. Cards com foto, nome, nicho e seguidores. Ao clicar, vai para o perfil completo. Botão abaixo: "Ver Casting Completo".</div>
+        <div class="wire-elements">
+          <span class="wire-el">Grid de cards (3-4 por linha)</span>
+          <span class="wire-el">Foto + nome + nicho + seguidores</span>
+          <span class="wire-el cta">Ver Casting Completo</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Números / Social Proof</div>
+        <div class="wire-desc">Contadores animados: <strong>X+ influenciadores, Y+ campanhas, Z+ marcas atendidas, W+ milhões de alcance</strong>. Animação de contagem quando a seção entra na tela.</div>
+        <div class="wire-elements">
+          <span class="wire-el">4 contadores animados</span>
+          <span class="wire-el">Ícones ou ilustrações</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Cases em Destaque</div>
+        <div class="wire-desc">2 a 3 cases principais em cards grandes. Cada card mostra: <strong>logo da marca, nome do influenciador, thumbnail do conteúdo e resultado principal</strong> (ex: "2M views em 24h"). Link para a página completa do case.</div>
+        <div class="wire-elements">
+          <span class="wire-el">Cards grandes de cases</span>
+          <span class="wire-el">Resultado em destaque</span>
+          <span class="wire-el cta">Ver Todos os Cases</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Serviços Resumo</div>
+        <div class="wire-desc">3 blocos lado a lado: <strong>Gestão de Influenciadores (90%)</strong>, <strong>Produção Audiovisual</strong>, <strong>Estratégia e Planejamento</strong>. Ícone, título curto e 1-2 linhas de descrição cada. Link "Saiba mais" para a página de Serviços.</div>
+        <div class="wire-elements">
+          <span class="wire-el">3 blocos de serviço</span>
+          <span class="wire-el">Ícone + título + descrição</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">CTA Final</div>
+        <div class="wire-desc">Faixa com fundo em gradiente. Texto tipo: "Pronto para levar sua marca ao próximo nível?". <strong>Dois caminhos: "Sou uma Marca" e "Sou Influenciador"</strong> — cada um leva para um fluxo diferente.</div>
+        <div class="wire-elements">
+          <span class="wire-el cta">Sou uma Marca</span>
+          <span class="wire-el cta">Sou Influenciador</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Footer</div>
+        <div class="wire-desc">Logo, links rápidos, redes sociais (Instagram, TikTok, LinkedIn, YouTube), email e telefone. <strong>Barra de logos de clientes</strong> pode se repetir aqui de forma compacta.</div>
+        <div class="wire-elements">
+          <span class="wire-el">Logo + redes sociais</span>
+          <span class="wire-el">Links rápidos</span>
+          <span class="wire-el">Contato</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──────────── CASTING ──────────── -->
+  <div class="page-card">
+    <div class="page-header">
+      <div class="page-icon" style="background: linear-gradient(135deg, #6D28D9, #60A5FA);">C</div>
+      <div>
+        <h3>Casting (Catálogo de Influenciadores)</h3>
+        <div class="page-url">/casting</div>
+      </div>
+    </div>
+    <div class="page-body">
+      <div class="features">
+        <span class="feat filter">Filtros avançados</span>
+        <span class="feat responsive">Responsivo</span>
+        <span class="feat seo">SEO</span>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Header da Página</div>
+        <div class="wire-desc">Título "Nosso Casting" + subtítulo curto. <strong>Barra de busca</strong> para pesquisar por nome.</div>
+        <div class="wire-elements">
+          <span class="wire-el">Título + subtítulo</span>
+          <span class="wire-el input">Campo de busca</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Filtros</div>
+        <div class="wire-desc">Barra de filtros horizontal com <strong>botões de categoria</strong> (Todos, Lifestyle, Beleza, Fitness, Tech, Gastronomia, etc). Dropdown para <strong>ordenar</strong>: mais seguidores, A-Z, mais recentes. Filtro por <strong>plataforma</strong>: Instagram, TikTok, YouTube.</div>
+        <div class="wire-elements">
+          <span class="wire-el">Categorias (botões/pills)</span>
+          <span class="wire-el input">Ordenar por</span>
+          <span class="wire-el input">Plataforma</span>
+          <span class="wire-el">Limpar filtros</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Grid de Influenciadores</div>
+        <div class="wire-desc"><strong>Cards em grid responsivo</strong> (3 colunas no desktop, 2 no tablet, 1 no celular). Cada card mostra: foto de perfil, nome, nicho/categoria, número de seguidores, plataformas ativas (ícones). Hover revela botão "Ver Perfil". Como são até 50, <strong>carrega todos de uma vez</strong> (sem paginação), usando lazy loading nas imagens para performance.</div>
+        <div class="wire-elements">
+          <span class="wire-el">Foto circular</span>
+          <span class="wire-el">Nome + @handle</span>
+          <span class="wire-el">Nicho/Categoria</span>
+          <span class="wire-el">Seguidores</span>
+          <span class="wire-el">Ícones de plataformas</span>
+          <span class="wire-el cta">Ver Perfil</span>
+        </div>
+      </div>
+      <div class="note">
+        <strong>Performance:</strong> Com até 50 influenciadores, os filtros funcionam no próprio navegador (client-side) — sem necessidade de backend pesado. As imagens usam lazy loading e formato WebP para carregar rápido.
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">CTA para Influenciadores</div>
+        <div class="wire-desc">Faixa no final: "Quer fazer parte do nosso casting?" com <strong>botão "Cadastre-se"</strong> que direciona para formulário.</div>
+        <div class="wire-elements">
+          <span class="wire-el cta">Quero Fazer Parte</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──────────── PERFIL DO INFLUENCIADOR ──────────── -->
+  <div class="page-card">
+    <div class="page-header">
+      <div class="page-icon" style="background: linear-gradient(135deg, #F472B6, #FB923C);">P</div>
+      <div>
+        <h3>Perfil do Influenciador</h3>
+        <div class="page-url">/casting/[nome-do-influenciador]</div>
+      </div>
+    </div>
+    <div class="page-body">
+      <div class="wire-section">
+        <div class="wire-label">Header do Perfil</div>
+        <div class="wire-desc"><strong>Foto grande + cover photo</strong>. Nome, @handle, bio curta, localização, nichos (tags). Ícones das redes sociais com links.</div>
+        <div class="wire-elements">
+          <span class="wire-el">Cover photo</span>
+          <span class="wire-el">Avatar grande</span>
+          <span class="wire-el">Nome + bio</span>
+          <span class="wire-el">Tags de nicho</span>
+          <span class="wire-el">Links redes sociais</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Métricas</div>
+        <div class="wire-desc">Cards com números: <strong>seguidores por plataforma, média de engajamento, alcance médio</strong>. Apresentado de forma visual e limpa.</div>
+        <div class="wire-elements">
+          <span class="wire-el">Seguidores (por rede)</span>
+          <span class="wire-el">Taxa de engajamento</span>
+          <span class="wire-el">Alcance médio</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Portfolio / Conteúdo</div>
+        <div class="wire-desc">Gallery com <strong>thumbnails de conteúdos recentes ou melhores trabalhos</strong>. Pode ser embed de Instagram/TikTok ou imagens estáticas com link.</div>
+        <div class="wire-elements">
+          <span class="wire-el">Grid de conteúdos (3 colunas)</span>
+          <span class="wire-el">Thumbnails clicáveis</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Marcas que Trabalhou</div>
+        <div class="wire-desc">Mini barra de logos das marcas com quem esse influenciador já fez campanhas.</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">CTA de Contato</div>
+        <div class="wire-desc">"Quer trabalhar com [Nome]?" + <strong>botão de contato</strong> que preenche automaticamente o formulário com o nome do influenciador.</div>
+        <div class="wire-elements">
+          <span class="wire-el cta">Solicitar Orçamento com [Nome]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──────────── SIMULADOR DE CAMPANHAS ──────────── -->
+  <div class="page-card">
+    <div class="page-header">
+      <div class="page-icon" style="background: linear-gradient(135deg, #A78BFA, #FB923C);">⚙</div>
+      <div>
+        <h3>Simulador de Campanhas</h3>
+        <div class="page-url">/simulador</div>
+      </div>
+    </div>
+    <div class="page-body">
+      <div class="features">
+        <span class="feat">Interativo</span>
+        <span class="feat filter">Lead Generation</span>
+        <span class="feat seo">Educativo</span>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Toggle de Modo</div>
+        <div class="wire-desc">Toggle no topo da página alternando entre dois modos: <strong>"Sou uma Marca"</strong> e <strong>"Sou Influenciador"</strong>. Visual tipo switch com as duas opções, fundo muda de cor conforme o modo selecionado.</div>
+        <div class="wire-elements">
+          <span class="wire-el">Toggle Marca/Influenciador</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Modo Marca — Controles</div>
+        <div class="wire-desc">Painel de controles interativos no lado esquerdo. <strong>Parâmetros:</strong> Tamanho do influenciador (Dial: Nano a Mega), Quantidade de influenciadores (Dial: 1 a 10+), Plataformas (Toggles: Instagram / TikTok / YouTube), Tipo de conteúdo (Seletor: Stories / Feed / Reels-Short / Vídeo dedicado), Duração da campanha (Dial: 1 semana a 6 meses), Exclusividade (Toggle On/Off), Porte da marca (Seletor: Startup-PME / Média empresa / Grande empresa / Multinacional), Nível de nicho do produto (Dial: Massa a Nichado), Faixa de investimento (Seletor: Explorando / Até R$50K / R$50-200K / R$200K+).</div>
+        <div class="wire-elements">
+          <span class="wire-el">Dial Tamanho</span>
+          <span class="wire-el">Dial Quantidade</span>
+          <span class="wire-el">Toggle Plataformas</span>
+          <span class="wire-el">Seletor Conteúdo</span>
+          <span class="wire-el">Dial Duração</span>
+          <span class="wire-el">Toggle Exclusividade</span>
+          <span class="wire-el">Seletor Porte</span>
+          <span class="wire-el">Dial Nicho</span>
+          <span class="wire-el">Seletor Investimento</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Modo Marca — Resultado</div>
+        <div class="wire-desc">Lado direito da tela. <strong>Gráfico radar (aranha) com 5 eixos animados:</strong> Alcance Potencial, Engajamento Esperado, Durabilidade do Conteúdo, Custo Relativo, Complexidade de Gestão. Os eixos se movem em tempo real conforme o usuário ajusta os controles. Abaixo do gráfico, conclusão dinâmica que muda conforme a complexidade de gestão (de "campanha direta" até "campanha complexa que se beneficia de agência especializada").</div>
+        <div class="wire-elements">
+          <span class="wire-el">Gráfico Radar 5 eixos</span>
+          <span class="wire-el">Conclusão Dinâmica</span>
+          <span class="wire-el cta">Montar com a Seek</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Modo Influenciador — Controles</div>
+        <div class="wire-desc"><strong>Parâmetros:</strong> Seguidores totais (Dial: 10K a 5M+), Taxa de engajamento (Dial: 1% a 15%), Plataformas ativas (Toggles: Instagram / TikTok / YouTube / Twitter), Frequência de postagem (Dial: 1x semana a diário), Nicho definido (Toggle: Sim / Não / Mais ou menos), Experiência com marcas (Seletor: Nunca / Algumas vezes / Frequente).</div>
+        <div class="wire-elements">
+          <span class="wire-el">Dial Seguidores</span>
+          <span class="wire-el">Dial Engajamento</span>
+          <span class="wire-el">Toggle Plataformas</span>
+          <span class="wire-el">Dial Frequência</span>
+          <span class="wire-el">Toggle Nicho</span>
+          <span class="wire-el">Seletor Experiência</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Modo Influenciador — Resultado</div>
+        <div class="wire-desc"><strong>Gauge/velocímetro de Score de Atratividade (0-100)</strong> + 3 barras horizontais: Potencial de Monetização, Versatilidade, Atratividade para Marcas. Mensagem personalizada por faixa: <strong>Score 80-100</strong> (perfil altamente atrativo, CTA para candidatar-se ao casting), <strong>Score 50-79</strong> (base sólida com ajustes sugeridos, Seek ajuda a crescer), <strong>Score 20-49</strong> (caminho certo, foco em nicho e consistência, Seek orienta), <strong>Score 0-19</strong> (todo criador começou de algum lugar, dicas para crescer).</div>
+        <div class="wire-elements">
+          <span class="wire-el">Gauge Score 0-100</span>
+          <span class="wire-el">3 barras de indicadores</span>
+          <span class="wire-el">Mensagem personalizada</span>
+          <span class="wire-el cta">CTA Adaptativo</span>
+        </div>
+      </div>
+      <div class="note">
+        <strong>V2 — Inteligência Artificial:</strong> Na segunda fase, o simulador ganha uma camada de IA que analisa a empresa/marca automaticamente e sugere o tipo ideal de campanha (Performance, Branding ou Projetos Especiais), o mix de influenciadores e o formato de conteúdo recomendado.
+      </div>
+    </div>
+  </div>
+
+  <!-- ──────────── SOBRE ──────────── -->
+  <div class="page-card">
+    <div class="page-header">
+      <div class="page-icon" style="background: linear-gradient(135deg, #34D399, #60A5FA);">S</div>
+      <div>
+        <h3>Sobre</h3>
+        <div class="page-url">/sobre</div>
+      </div>
+    </div>
+    <div class="page-body">
+      <div class="wire-section">
+        <div class="wire-label">Hero</div>
+        <div class="wire-desc">Título "Quem é a SeekMedia" + <strong>vídeo institucional ou foto da equipe</strong>. Texto curto com a missão da agência.</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Nossa História</div>
+        <div class="wire-desc">Timeline ou texto narrativo contando a trajetória. <strong>Marcos importantes</strong> (fundação, primeiro grande cliente, premiações, etc).</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Números</div>
+        <div class="wire-desc">Mesmos contadores da home ou versão expandida com mais detalhes.</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Equipe</div>
+        <div class="wire-desc">Grid com <strong>fotos e nomes dos sócios/liderança</strong>. Cargo e link do LinkedIn. Pode expandir para toda a equipe se quiser.</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Valores / Diferenciais</div>
+        <div class="wire-desc">3-4 blocos com os pilares da agência (ex: Autenticidade, Resultado, Criatividade, Dados).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──────────── CASES ──────────── -->
+  <div class="page-card">
+    <div class="page-header">
+      <div class="page-icon" style="background: linear-gradient(135deg, #FB923C, #F472B6);">K</div>
+      <div>
+        <h3>Cases de Sucesso</h3>
+        <div class="page-url">/cases</div>
+      </div>
+    </div>
+    <div class="page-body">
+      <div class="wire-section">
+        <div class="wire-label">Header</div>
+        <div class="wire-desc">Título + subtítulo. Filtros por <strong>segmento</strong> (Beleza, Tech, Food, etc) ou <strong>plataforma</strong>.</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Grid de Cases</div>
+        <div class="wire-desc">Cards grandes em <strong>layout alternado</strong> (imagem esquerda/direita). Cada card: thumbnail do conteúdo, logo da marca, nome do influenciador, <strong>resultado em destaque</strong> (views, engajamento, vendas). Link "Ver case completo".</div>
+        <div class="wire-elements">
+          <span class="wire-el">Thumbnail</span>
+          <span class="wire-el">Logo marca + influenciador</span>
+          <span class="wire-el">Métrica principal</span>
+          <span class="wire-el cta">Ver Case</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Barra de Logos (repetição)</div>
+        <div class="wire-desc">Mesma barra de logos de clientes que aparece na home, reforçando credibilidade.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──────────── CASE DETAIL ──────────── -->
+  <div class="page-card">
+    <div class="page-header">
+      <div class="page-icon" style="background: linear-gradient(135deg, #FB923C, #EF4444);">D</div>
+      <div>
+        <h3>Detalhe do Case</h3>
+        <div class="page-url">/cases/[nome-do-case]</div>
+      </div>
+    </div>
+    <div class="page-body">
+      <div class="wire-section">
+        <div class="wire-label">Hero do Case</div>
+        <div class="wire-desc">Imagem/vídeo do conteúdo em destaque. <strong>Logo da marca + foto do influenciador</strong>. Título da campanha.</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Desafio → Solução → Resultado</div>
+        <div class="wire-desc">Formato storytelling: qual era o <strong>objetivo da marca</strong>, como a SeekMedia <strong>planejou e executou</strong>, e qual foi o <strong>resultado final</strong> com números concretos.</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Métricas do Case</div>
+        <div class="wire-desc">Dashboard visual: views, engajamento, alcance, conversão. <strong>Antes vs. depois</strong> se possível.</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Galeria de Conteúdos</div>
+        <div class="wire-desc">Prints, vídeos embedados, carrossel com as peças produzidas na campanha.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──────────── SERVIÇOS ──────────── -->
+  <div class="page-card">
+    <div class="page-header">
+      <div class="page-icon" style="background: linear-gradient(135deg, #22D3EE, #6D28D9);">V</div>
+      <div>
+        <h3>Serviços</h3>
+        <div class="page-url">/servicos</div>
+      </div>
+    </div>
+    <div class="page-body">
+      <div class="wire-section">
+        <div class="wire-label">Gestão de Influenciadores (Principal)</div>
+        <div class="wire-desc">Seção grande explicando: <strong>seleção e curadoria, negociação, gestão de campanhas, relatórios de performance</strong>. Pode ter sub-ícones para cada etapa do processo.</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Produção Audiovisual</div>
+        <div class="wire-desc">Explicação do serviço de produção: <strong>direção criativa, filmagem, edição, pós-produção</strong>. Gallery com exemplos de trabalhos.</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Estratégia e Planejamento</div>
+        <div class="wire-desc">Consultoria, mapeamento de influenciadores, análise de dados, <strong>planejamento de campanhas 360°</strong>.</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Como Funciona (Processo)</div>
+        <div class="wire-desc"><strong>Timeline horizontal com 4-5 etapas</strong>: Briefing → Curadoria → Produção → Publicação → Relatório. Visual clean e fácil de entender.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──────────── CONTATO ──────────── -->
+  <div class="page-card">
+    <div class="page-header">
+      <div class="page-icon" style="background: linear-gradient(135deg, #34D399, #22D3EE);">@</div>
+      <div>
+        <h3>Contato</h3>
+        <div class="page-url">/contato</div>
+      </div>
+    </div>
+    <div class="page-body">
+      <div class="wire-section">
+        <div class="wire-label">Formulário de Contato</div>
+        <div class="wire-desc">Layout duas colunas: formulário à esquerda, informações à direita. <strong>Campos: Nome, Email, Empresa, Tipo (Marca / Influenciador / Outro), Mensagem</strong>. Se vier do perfil de um influenciador, preenche automaticamente "Interesse no influenciador X".</div>
+        <div class="wire-elements">
+          <span class="wire-el input">Nome</span>
+          <span class="wire-el input">Email</span>
+          <span class="wire-el input">Empresa</span>
+          <span class="wire-el input">Tipo de contato</span>
+          <span class="wire-el input">Mensagem</span>
+          <span class="wire-el cta">Enviar</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Informações de Contato</div>
+        <div class="wire-desc">Email, telefone/WhatsApp, endereço (se tiver escritório), <strong>redes sociais</strong>, horário de atendimento.</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Mapa (opcional)</div>
+        <div class="wire-desc">Google Maps embutido se fizer sentido mostrar a localização.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──────────── PAINEL ADMIN ──────────── -->
+  <div class="page-card">
+    <div class="page-header">
+      <div class="page-icon" style="background: linear-gradient(135deg, #EF4444, #FB923C);">A</div>
+      <div>
+        <h3>Painel Admin (Cadastro de Influenciadores)</h3>
+        <div class="page-url">/admin (acesso restrito)</div>
+      </div>
+    </div>
+    <div class="page-body">
+      <div class="features">
+        <span class="feat nocode">No-Code</span>
+        <span class="feat api">Painel interno</span>
+        <span class="feat responsive">Responsivo</span>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Login Simples</div>
+        <div class="wire-desc">Tela de login com <strong>email + senha</strong>. Sem necessidade de cadastro público — só usuários criados internamente.</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Lista de Influenciadores</div>
+        <div class="wire-desc">Tabela com todos os influenciadores cadastrados. Colunas: <strong>foto, nome, categoria, seguidores, status (ativo/inativo)</strong>. Busca e filtros. Botões de editar e excluir.</div>
+        <div class="wire-elements">
+          <span class="wire-el">Tabela responsiva</span>
+          <span class="wire-el input">Buscar</span>
+          <span class="wire-el cta">+ Novo Influenciador</span>
+        </div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-label">Formulário de Cadastro / Edição</div>
+        <div class="wire-desc">Modal ou página com campos: <strong>Nome, @handle, Bio, Foto de perfil, Cover photo, Categoria/Nicho, Plataformas (Instagram/TikTok/YouTube + links), Seguidores por plataforma, Taxa de engajamento, Localização, Marcas parceiras, Portfolio (upload de imagens)</strong>. Tudo visual, sem código — qualquer funcionário consegue usar.</div>
+        <div class="wire-elements">
+          <span class="wire-el input">Dados básicos</span>
+          <span class="wire-el input">Upload de fotos</span>
+          <span class="wire-el input">Redes sociais + métricas</span>
+          <span class="wire-el input">Categorias (multi-select)</span>
+          <span class="wire-el input">Portfolio</span>
+          <span class="wire-el cta">Salvar</span>
+        </div>
+      </div>
+      <div class="note">
+        <strong>Abordagem No-Code recomendada:</strong> Os dados dos influenciadores podem ficar em um <strong>Google Sheets</strong> ou <strong>Airtable</strong> como "banco de dados", e o painel admin se conecta via API. Assim, se alguém quiser, pode editar direto na planilha também. O site público puxa os dados da mesma fonte.
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SUMMARY TABLE -->
+  <!-- ════════════════════════════════════════ -->
+  <h2 class="section-title">Resumo de Funcionalidades</h2>
+  <p class="section-sub">Tudo que o site precisa ter, organizado por prioridade</p>
+
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Funcionalidade</th>
+        <th>Página</th>
+        <th>Prioridade</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Animação 3D / vídeo no hero</td><td>Home</td><td><span class="status essential"></span>Essencial</td></tr>
+      <tr><td>Barra de logos de clientes (carrossel)</td><td>Home, Cases, Footer</td><td><span class="status essential"></span>Essencial</td></tr>
+      <tr><td>Catálogo com filtros e busca</td><td>Casting</td><td><span class="status essential"></span>Essencial</td></tr>
+      <tr><td>Página individual do influenciador</td><td>Perfil</td><td><span class="status essential"></span>Essencial</td></tr>
+      <tr><td>Formulário de contato inteligente</td><td>Contato</td><td><span class="status essential"></span>Essencial</td></tr>
+      <tr><td>Cases com resultados</td><td>Cases</td><td><span class="status essential"></span>Essencial</td></tr>
+      <tr><td>Painel admin no-code</td><td>Admin</td><td><span class="status essential"></span>Essencial</td></tr>
+      <tr><td>Simulador de Campanhas (modo Marca + Influenciador)</td><td>Simulador</td><td><span class="status essential"></span>Essencial</td></tr>
+      <tr><td>Simulador v2 com camada de IA</td><td>Simulador</td><td><span class="status future"></span>Futuro</td></tr>
+      <tr><td>Contadores animados</td><td>Home, Sobre</td><td><span class="status nice"></span>Importante</td></tr>
+      <tr><td>Lazy loading de imagens (WebP)</td><td>Casting, Cases</td><td><span class="status nice"></span>Importante</td></tr>
+      <tr><td>SEO otimizado (meta tags, sitemap)</td><td>Todas</td><td><span class="status nice"></span>Importante</td></tr>
+      <tr><td>Integração WhatsApp</td><td>Contato</td><td><span class="status nice"></span>Importante</td></tr>
+      <tr><td>Dark mode toggle</td><td>Todas</td><td><span class="status future"></span>Futuro</td></tr>
+      <tr><td>Blog / Conteúdo</td><td>Nova página</td><td><span class="status future"></span>Futuro</td></tr>
+      <tr><td>Área do influenciador (auto-cadastro)</td><td>Nova página</td><td><span class="status future"></span>Futuro</td></tr>
+      <tr><td>Dashboard de métricas para clientes</td><td>Nova página</td><td><span class="status future"></span>Futuro</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- TECH SUGGESTIONS -->
+  <!-- ════════════════════════════════════════ -->
+  <h2 class="section-title">Stack Técnica Sugerida</h2>
+  <p class="section-sub">Ferramentas recomendadas para construir o site seguindo o método do Jack Roberts</p>
+
+  <div class="tech-grid">
+    <div class="tech-item">
+      <div class="tech-name" style="color: var(--accent);">Claude Code + Anti-Gravity</div>
+      <div class="tech-why">Gera o código do site inteiro com IA. Você descreve, ele constrói.</div>
+    </div>
+    <div class="tech-item">
+      <div class="tech-name" style="color: var(--blue);">Next.js ou Astro</div>
+      <div class="tech-why">Framework que o Claude vai usar para criar o site. Rápido, SEO-friendly e moderno.</div>
+    </div>
+    <div class="tech-item">
+      <div class="tech-name" style="color: var(--green);">Airtable ou Google Sheets</div>
+      <div class="tech-why">Banco de dados no-code para os influenciadores. Fácil de editar, conecta com o site via API.</div>
+    </div>
+    <div class="tech-item">
+      <div class="tech-name" style="color: var(--pink);">Vercel</div>
+      <div class="tech-why">Hospedagem gratuita. Publica o site com um comando e atualiza automaticamente.</div>
+    </div>
+    <div class="tech-item">
+      <div class="tech-name" style="color: var(--orange);">Cloudinary</div>
+      <div class="tech-why">Armazenamento otimizado de imagens. Converte para WebP automaticamente e redimensiona.</div>
+    </div>
+    <div class="tech-item">
+      <div class="tech-name" style="color: var(--cyan);">GitHub</div>
+      <div class="tech-why">Repositório do código. Integra com Vercel para deploy automático.</div>
+    </div>
+  </div>
+
+  <div class="note" style="margin-top: 32px; margin-bottom: 60px;">
+    <strong>Próximo passo:</strong> Revise este sitemap e wireframe. Quando estiver satisfeito com a estrutura, vamos partir para o Passo 1 do guia (Identidade da Marca com Firecrawl) e depois construir o site de verdade com o Claude Code.
+  </div>
+
+</div>
+</body>
+</html>

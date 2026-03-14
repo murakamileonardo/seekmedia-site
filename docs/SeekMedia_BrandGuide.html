@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SeekMedia — Brand Guide</title>
+<style>
+  :root {
+    --bg: #101818;
+    --surface: #1A2228;
+    --surface2: #202830;
+    --border: #2E3A3A;
+    --text: #F8F8F8;
+    --muted: #8899A0;
+    --cyan: #00F0D0;
+    --green: #80F090;
+    --yellow: #E0F050;
+    --lime: #D0F060;
+    --accent-green: #10A010;
+    --teal: #10C0B0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, system-ui, sans-serif; line-height: 1.7; }
+  .container { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
+
+  .header { text-align: center; padding: 80px 0 60px; }
+  .header .badge { display: inline-block; background: linear-gradient(135deg, var(--cyan), var(--lime)); color: #000; font-size: 11px; font-weight: 800; letter-spacing: 2px; padding: 6px 18px; border-radius: 20px; margin-bottom: 24px; text-transform: uppercase; }
+  .header h1 { font-size: 48px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+  .header h1 span { background: linear-gradient(135deg, var(--cyan), var(--green), var(--yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .header p { color: var(--muted); font-size: 15px; }
+  .divider { height: 4px; background: linear-gradient(90deg, var(--cyan), var(--green), var(--lime), var(--yellow)); border-radius: 2px; margin: 48px 0; }
+
+  h2 { font-size: 28px; font-weight: 700; margin: 48px 0 8px; }
+  h3 { font-size: 18px; font-weight: 600; margin: 32px 0 12px; color: var(--cyan); }
+  .sub { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+  p.body { color: var(--muted); font-size: 14px; margin-bottom: 16px; line-height: 1.7; }
+
+  /* Color swatches */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 20px 0; }
+  .swatch { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  .swatch-color { height: 100px; display: flex; align-items: flex-end; padding: 10px 14px; }
+  .swatch-info { background: var(--surface); padding: 12px 14px; }
+  .swatch-name { font-weight: 700; font-size: 13px; margin-bottom: 2px; }
+  .swatch-hex { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; color: var(--muted); }
+  .swatch-use { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* Gradient bar */
+  .gradient-demo { height: 60px; border-radius: 12px; margin: 20px 0; }
+  .gradient-main { background: linear-gradient(90deg, #00F0D0, #40F0A0, #80F090, #B0F070, #D0F060, #E0F050); }
+  .gradient-glow { background: linear-gradient(135deg, #10C0B0, #00F0D0, #80F090); }
+
+  /* Typography */
+  .type-sample { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 12px 0; }
+  .type-label { font-size: 11px; color: var(--cyan); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 8px; }
+
+  /* Do/Don't */
+  .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+  .rule-card { background: var(--surface); border-radius: 12px; padding: 20px; border: 1px solid var(--border); }
+  .rule-card.do { border-top: 3px solid var(--green); }
+  .rule-card.dont { border-top: 3px solid #EF4444; }
+  .rule-title { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .rule-title.do { color: var(--green); }
+  .rule-title.dont { color: #EF4444; }
+  .rule-card li { font-size: 13px; color: var(--muted); margin-bottom: 6px; list-style: none; padding-left: 16px; position: relative; }
+  .rule-card li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; }
+  .rule-card.do li::before { background: var(--green); }
+  .rule-card.dont li::before { background: #EF4444; }
+
+  /* Component examples */
+  .example-box { background: var(--surface); border: 1px dashed var(--border); border-radius: 12px; padding: 24px; margin: 16px 0; }
+  .example-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+
+  /* Logo bar simulation */
+  .logo-bar-demo { background: var(--surface2); border-radius: 12px; padding: 20px 30px; margin: 16px 0; display: flex; align-items: center; gap: 40px; overflow: hidden; }
+  .logo-placeholder { width: 80px; height: 30px; background: rgba(255,255,255,0.15); border-radius: 6px; flex-shrink: 0; }
+
+  /* Button demos */
+  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
+  .btn-demo { padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; }
+  .btn-primary { background: linear-gradient(135deg, var(--cyan), var(--green)); color: #000; }
+  .btn-secondary { background: transparent; border: 2px solid var(--cyan); color: var(--cyan); }
+  .btn-ghost { background: rgba(255,255,255,0.08); color: var(--text); }
+
+  /* Card demo */
+  .card-demo { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px; max-width: 300px; margin: 16px 0; }
+  .card-demo .avatar { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--green)); margin-bottom: 12px; }
+  .card-demo h4 { font-size: 16px; margin-bottom: 4px; }
+  .card-demo .tag { display: inline-block; background: rgba(0,240,208,0.15); color: var(--cyan); font-size: 11px; padding: 3px 10px; border-radius: 12px; margin-right: 6px; }
+
+  /* CSS vars export */
+  .code-block { background: #0A0E10; border: 1px solid var(--border); border-radius: 10px; padding: 20px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 13px; line-height: 1.8; overflow-x: auto; margin: 16px 0; color: var(--muted); }
+  .code-block .comment { color: #4A5568; }
+  .code-block .prop { color: var(--cyan); }
+  .code-block .val { color: var(--green); }
+
+  .note { background: rgba(0,240,208,0.06); border-left: 3px solid var(--cyan); padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 20px 0; font-size: 13px; color: var(--muted); }
+  .note strong { color: var(--cyan); }
+
+  @media (max-width: 600px) {
+    .header h1 { font-size: 32px; }
+    .color-grid { grid-template-columns: 1fr 1fr; }
+    .rules-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="badge">Brand Guide</div>
+    <h1>seek<span>media</span></h1>
+    <p>Guia de identidade visual extraído do catálogo oficial 2025</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════ -->
+  <!-- 1. PALETA DE CORES -->
+  <!-- ═══════════════════════════════ -->
+  <h2>1. Paleta de Cores</h2>
+  <p class="sub">Cores extraídas diretamente do catálogo via análise de pixel</p>
+
+  <h3>Cores Base</h3>
+  <div class="color-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background: #101818;"><span style="color:#888;font-size:11px;">Background</span></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Dark Background</div>
+        <div class="swatch-hex">#101818</div>
+        <div class="swatch-use">Fundo principal de todas as páginas</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #1A2228;"><span style="color:#888;font-size:11px;">Surface</span></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Surface</div>
+        <div class="swatch-hex">#1A2228</div>
+        <div class="swatch-use">Cards, painéis, seções elevadas</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #202830;"><span style="color:#888;font-size:11px;">Surface 2</span></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Surface Elevado</div>
+        <div class="swatch-hex">#202830</div>
+        <div class="swatch-use">Hover states, menus, dropdowns</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #F8F8F8; border-bottom: 1px solid #333;">
+        <span style="color:#333;font-size:11px;">Text</span>
+      </div>
+      <div class="swatch-info">
+        <div class="swatch-name">White Text</div>
+        <div class="swatch-hex">#F8F8F8</div>
+        <div class="swatch-use">Textos principais, títulos, headings</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Gradiente Principal (Assinatura da Marca)</h3>
+  <div class="gradient-demo gradient-main"></div>
+  <div class="color-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background: #00F0D0;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Cyan</div>
+        <div class="swatch-hex">#00F0D0</div>
+        <div class="swatch-use">Início do gradiente, links, CTAs primários, destaques</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #80F090;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Green</div>
+        <div class="swatch-hex">#80F090</div>
+        <div class="swatch-use">Meio do gradiente, ícones, indicadores positivos</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #D0F060;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Lime</div>
+        <div class="swatch-hex">#D0F060</div>
+        <div class="swatch-use">Transição do gradiente, tags, badges</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #E0F050;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Yellow</div>
+        <div class="swatch-hex">#E0F050</div>
+        <div class="swatch-use">Final do gradiente, destaques secundários, "Strategy" no logo</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Cores de Suporte</h3>
+  <div class="color-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background: #10C0B0;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Teal</div>
+        <div class="swatch-hex">#10C0B0</div>
+        <div class="swatch-use">Glow effects, sombras coloridas, hover</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #10A010;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Deep Green</div>
+        <div class="swatch-hex">#10A010</div>
+        <div class="swatch-use">Ícone do logo, elementos gráficos 3D</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #8899A0;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Muted</div>
+        <div class="swatch-hex">#8899A0</div>
+        <div class="swatch-use">Texto secundário, labels, descrições</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #2E3A3A;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Border</div>
+        <div class="swatch-hex">#2E3A3A</div>
+        <div class="swatch-use">Bordas, separadores, linhas</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Regra de ouro:</strong> O gradiente cyan→green→yellow é a assinatura visual da SeekMedia. Ele aparece na barra inferior de cada slide, nos títulos de destaque e nos elementos interativos. Nunca use o gradiente em texto corrido — só em headings, barras decorativas e CTAs.
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════ -->
+  <!-- 2. GRADIENTES -->
+  <!-- ═══════════════════════════════ -->
+  <h2>2. Gradientes</h2>
+  <p class="sub">Gradientes são o DNA visual da marca</p>
+
+  <h3>Gradiente Primário (Barra de assinatura)</h3>
+  <div class="gradient-demo gradient-main"></div>
+  <div class="code-block">
+    <span class="comment">/* Barra inferior que aparece em todas as páginas */</span><br>
+    <span class="prop">background</span>: <span class="val">linear-gradient(90deg, #00F0D0, #40F0A0, #80F090, #B0F070, #D0F060, #E0F050)</span>;
+  </div>
+
+  <h3>Gradiente Glow (Efeitos de brilho)</h3>
+  <div class="gradient-demo gradient-glow"></div>
+  <div class="code-block">
+    <span class="comment">/* Usado em hover, sombras e efeitos de luz */</span><br>
+    <span class="prop">background</span>: <span class="val">linear-gradient(135deg, #10C0B0, #00F0D0, #80F090)</span>;
+  </div>
+
+  <h3>Gradiente de Texto (Títulos de destaque)</h3>
+  <div class="example-box">
+    <div class="example-label">Exemplo: Heading com gradiente</div>
+    <div style="font-size: 36px; font-weight: 800; background: linear-gradient(135deg, #00F0D0, #80F090, #E0F050); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+      Influence Strategy
+    </div>
+  </div>
+  <div class="code-block">
+    <span class="prop">background</span>: <span class="val">linear-gradient(135deg, #00F0D0, #80F090, #E0F050)</span>;<br>
+    <span class="prop">-webkit-background-clip</span>: <span class="val">text</span>;<br>
+    <span class="prop">-webkit-text-fill-color</span>: <span class="val">transparent</span>;
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════ -->
+  <!-- 3. TIPOGRAFIA -->
+  <!-- ═══════════════════════════════ -->
+  <h2>3. Tipografia</h2>
+  <p class="sub">Fontes e hierarquia de texto</p>
+
+  <div class="type-sample">
+    <div class="type-label">H1 — Título Principal</div>
+    <div style="font-size: 48px; font-weight: 800; letter-spacing: -0.5px;">SeekMedia Clients</div>
+  </div>
+  <div class="type-sample">
+    <div class="type-label">H2 — Subtítulo / Destaque</div>
+    <div style="font-size: 32px; font-weight: 700; background: linear-gradient(135deg, #00F0D0, #E0F050); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Influence Strategy</div>
+  </div>
+  <div class="type-sample">
+    <div class="type-label">H3 — Seção</div>
+    <div style="font-size: 24px; font-weight: 600;">our results-optimizing flow</div>
+  </div>
+  <div class="type-sample">
+    <div class="type-label">Body — Texto corrido</div>
+    <div style="font-size: 16px; font-weight: 400; color: #8899A0; line-height: 1.7;">We're an agency created by influencers, for influencers. Our DNA is youthful, connected, and full of attitude.</div>
+  </div>
+  <div class="type-sample">
+    <div class="type-label">Dados / Métricas</div>
+    <div style="font-size: 42px; font-weight: 800; background: linear-gradient(135deg, #00F0D0, #80F090); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">+17.9 Million</div>
+    <div style="font-size: 14px; color: #8899A0; margin-top: 4px;">impressions</div>
+  </div>
+
+  <div class="note">
+    <strong>Fonte recomendada:</strong> Inter ou DM Sans (Google Fonts, gratuitas). Ambas são sem serifa, modernas e se aproximam do estilo do catálogo. Para números/métricas grandes, use peso 800 com gradiente.
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════ -->
+  <!-- 4. COMPONENTES -->
+  <!-- ═══════════════════════════════ -->
+  <h2>4. Componentes de UI</h2>
+  <p class="sub">Padrões visuais para o site</p>
+
+  <h3>Botões</h3>
+  <div class="btn-row">
+    <button class="btn-demo btn-primary">Fale Conosco</button>
+    <button class="btn-demo btn-secondary">Ver Casting</button>
+    <button class="btn-demo btn-ghost">Saiba Mais</button>
+  </div>
+  <div class="code-block">
+    <span class="comment">/* Primário: gradiente da marca */</span><br>
+    <span class="prop">background</span>: <span class="val">linear-gradient(135deg, #00F0D0, #80F090)</span>;<br>
+    <span class="prop">color</span>: <span class="val">#000</span>; <span class="comment">/* texto escuro em fundo claro */</span><br><br>
+    <span class="comment">/* Secundário: outline */</span><br>
+    <span class="prop">border</span>: <span class="val">2px solid #00F0D0</span>;<br>
+    <span class="prop">color</span>: <span class="val">#00F0D0</span>;<br><br>
+    <span class="comment">/* Ghost: sutil */</span><br>
+    <span class="prop">background</span>: <span class="val">rgba(255,255,255,0.08)</span>;
+  </div>
+
+  <h3>Card de Influenciador</h3>
+  <div class="card-demo">
+    <div class="avatar"></div>
+    <h4>Ronaldinho Gaúcho</h4>
+    <div style="font-size: 13px; color: var(--muted); margin-bottom: 8px;">@ronaldinho</div>
+    <div><span class="tag">Esporte</span><span class="tag">Lifestyle</span></div>
+    <div style="margin-top: 12px; font-size: 13px; color: var(--cyan); font-weight: 600;">155.3M seguidores</div>
+  </div>
+
+  <h3>Barra de Logos (Clientes)</h3>
+  <div class="logo-bar-demo">
+    <div class="logo-placeholder"></div>
+    <div class="logo-placeholder"></div>
+    <div class="logo-placeholder"></div>
+    <div class="logo-placeholder"></div>
+    <div class="logo-placeholder"></div>
+    <div class="logo-placeholder"></div>
+    <div class="logo-placeholder"></div>
+  </div>
+  <p class="body">Logos em branco (escala de cinza), ficam coloridos/brilhantes no hover. Carrossel automático infinito, velocidade suave.</p>
+
+  <h3>Barra de Gradiente (Assinatura)</h3>
+  <div style="height: 8px; background: linear-gradient(90deg, #00F0D0, #40F0A0, #80F090, #B0F070, #D0F060, #E0F050); border-radius: 4px; margin: 16px 0;"></div>
+  <p class="body">Presente na base de cada seção/página. Altura de 6-8px. É a marca registrada visual da Seek em todo material.</p>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════ -->
+  <!-- 5. REGRAS VISUAIS -->
+  <!-- ═══════════════════════════════ -->
+  <h2>5. Regras Visuais</h2>
+  <p class="sub">O que fazer e o que evitar</p>
+
+  <div class="rules-grid">
+    <div class="rule-card do">
+      <div class="rule-title do">FAZER</div>
+      <ul>
+        <li>Fundo sempre escuro (#101818)</li>
+        <li>Gradiente só em títulos, barras, botões e métricas</li>
+        <li>Fotos com tratamento de cor esverdeado/ciano</li>
+        <li>Espaçamento generoso entre seções</li>
+        <li>Barra gradiente na base de cada seção</li>
+        <li>Números em destaque com peso 800 + gradiente</li>
+        <li>Cards com bordas sutis (#2E3A3A)</li>
+        <li>Texto branco (#F8F8F8) para conteúdo principal</li>
+        <li>Animações suaves (ease, 300-500ms)</li>
+      </ul>
+    </div>
+    <div class="rule-card dont">
+      <div class="rule-title dont">EVITAR</div>
+      <ul>
+        <li>Fundo branco ou claro em qualquer página</li>
+        <li>Gradiente em texto corrido (só headings)</li>
+        <li>Cores fora da paleta (vermelho, rosa, azul puro)</li>
+        <li>Fotos sem tratamento de cor</li>
+        <li>Texto cinza claro em fundo cinza (baixo contraste)</li>
+        <li>Bordas grossas ou coloridas em cards</li>
+        <li>Mais de 2 gradientes na mesma seção</li>
+        <li>Tipografia serifada</li>
+        <li>Animações bruscas ou exageradas</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════ -->
+  <!-- 6. TRATAMENTO DE IMAGENS -->
+  <!-- ═══════════════════════════════ -->
+  <h2>6. Tratamento de Imagens</h2>
+  <p class="sub">Como as fotos aparecem no catálogo</p>
+
+  <h3>Fotos de Influenciadores</h3>
+  <p class="body">Fotos com overlay de cor ciano/esverdeada sutil. Contorno com glow no estilo "neon" usando a cor #10C0B0 com blur. O efeito visual é como se houvesse uma luz de neon atrás/ao redor da pessoa.</p>
+
+  <div class="code-block">
+    <span class="comment">/* Glow effect ao redor de fotos */</span><br>
+    <span class="prop">box-shadow</span>: <span class="val">0 0 40px rgba(16, 192, 176, 0.3), 0 0 80px rgba(0, 240, 208, 0.15)</span>;<br><br>
+    <span class="comment">/* Overlay na foto */</span><br>
+    <span class="prop">filter</span>: <span class="val">saturate(0.8) hue-rotate(-10deg)</span>;
+  </div>
+
+  <h3>Elementos 3D</h3>
+  <p class="body">O catálogo usa elementos 3D com materiais vítreos (glass morphism) em tons de verde/ciano. Esses elementos aparecem na capa e como decoração. Para o site, esse estilo pode ser usado no hero com animação de scroll (conforme o guia do Jack Roberts).</p>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════ -->
+  <!-- 7. CSS VARIABLES -->
+  <!-- ═══════════════════════════════ -->
+  <h2>7. CSS Variables (Copiar e Colar)</h2>
+  <p class="sub">Pronto para usar no código do site</p>
+
+  <div class="code-block">
+    <span class="comment">/* ═══ SeekMedia Brand Colors ═══ */</span><br>
+    <span class="prop">:root</span> {<br>
+    &nbsp;&nbsp;<span class="comment">/* Backgrounds */</span><br>
+    &nbsp;&nbsp;<span class="prop">--bg-primary</span>: <span class="val">#101818</span>;<br>
+    &nbsp;&nbsp;<span class="prop">--bg-surface</span>: <span class="val">#1A2228</span>;<br>
+    &nbsp;&nbsp;<span class="prop">--bg-elevated</span>: <span class="val">#202830</span>;<br>
+    &nbsp;&nbsp;<span class="prop">--bg-border</span>: <span class="val">#2E3A3A</span>;<br><br>
+    &nbsp;&nbsp;<span class="comment">/* Text */</span><br>
+    &nbsp;&nbsp;<span class="prop">--text-primary</span>: <span class="val">#F8F8F8</span>;<br>
+    &nbsp;&nbsp;<span class="prop">--text-muted</span>: <span class="val">#8899A0</span>;<br><br>
+    &nbsp;&nbsp;<span class="comment">/* Accent — Gradient stops */</span><br>
+    &nbsp;&nbsp;<span class="prop">--accent-cyan</span>: <span class="val">#00F0D0</span>;<br>
+    &nbsp;&nbsp;<span class="prop">--accent-green</span>: <span class="val">#80F090</span>;<br>
+    &nbsp;&nbsp;<span class="prop">--accent-lime</span>: <span class="val">#D0F060</span>;<br>
+    &nbsp;&nbsp;<span class="prop">--accent-yellow</span>: <span class="val">#E0F050</span>;<br><br>
+    &nbsp;&nbsp;<span class="comment">/* Support */</span><br>
+    &nbsp;&nbsp;<span class="prop">--teal</span>: <span class="val">#10C0B0</span>;<br>
+    &nbsp;&nbsp;<span class="prop">--deep-green</span>: <span class="val">#10A010</span>;<br><br>
+    &nbsp;&nbsp;<span class="comment">/* Gradients */</span><br>
+    &nbsp;&nbsp;<span class="prop">--gradient-bar</span>: <span class="val">linear-gradient(90deg, #00F0D0, #40F0A0, #80F090, #B0F070, #D0F060, #E0F050)</span>;<br>
+    &nbsp;&nbsp;<span class="prop">--gradient-glow</span>: <span class="val">linear-gradient(135deg, #10C0B0, #00F0D0, #80F090)</span>;<br>
+    &nbsp;&nbsp;<span class="prop">--gradient-text</span>: <span class="val">linear-gradient(135deg, #00F0D0, #80F090, #E0F050)</span>;<br>
+    }
+  </div>
+
+  <div class="note" style="margin-top: 40px; margin-bottom: 60px;">
+    <strong>Como usar este guia:</strong> Quando for construir o site com Claude Code no Anti-Gravity, cole o bloco de CSS variables acima como primeira instrução. Diga ao Claude: "Use este brand guide como base visual. Fundo escuro, gradientes neon, estilo da SeekMedia." Isso garante consistência em todas as páginas.
+  </div>
+
+</div>
+</body>
+</html>

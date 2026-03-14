@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth:*)",
+      "Bash(brew install:*)",
+      "Bash(gh --version)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm)",
+      "Read(//private/tmp/**)",
+      "Bash(npx create-next-app@latest seeksite --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm)",
+      "Bash(cp /Users/leonardo/Documents/AI-Class/SeekMedia_BrandGuide.html /Users/leonardo/Documents/Claude_CODE/SeekSite/docs/)",
+      "Bash(cp /Users/leonardo/Documents/AI-Class/SeekMedia_Sitemap_Wireframe.html /Users/leonardo/Documents/Claude_CODE/SeekSite/docs/)",
+      "Bash(find /Users/leonardo/Documents/AI-Class -name *.png -o -name *.svg -o -name *.jpg -o -name *.jpeg -o -name *.webp)",
+      "Bash(cp \"/Users/leonardo/Downloads/Logo Seekmedia.png\" /Users/leonardo/Documents/Claude_CODE/SeekSite/public/images/logo-seekmedia.png)",
+      "Bash(cp \"/Users/leonardo/Downloads/Logo Seek quadrado.jpg\" /Users/leonardo/Documents/Claude_CODE/SeekSite/public/images/logo-seekmedia-square.jpg)",
+      "Bash(cp \"/Users/leonardo/Downloads/Logo Seek quadrad.jpg\" /Users/leonardo/Documents/Claude_CODE/SeekSite/public/images/logo-seekmedia-square-alt.jpg)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"Initial Next.js + Tailwind project setup for SeekMedia:*)"
+    ]
+  }
+}
