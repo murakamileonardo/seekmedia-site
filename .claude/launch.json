@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "nextjs-dev",
+      "runtimeExecutable": "/Users/leonardo/.nvm/versions/node/v22.22.1/bin/node",
+      "runtimeArgs": ["/Users/leonardo/Documents/Claude_CODE/SeekSite/node_modules/.bin/next", "dev"],
+      "port": 3000
+    }
+  ]
+}
