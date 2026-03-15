@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FEATURED_CASES } from "@/lib/constants";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Button } from "@/components/ui/Button";
@@ -16,8 +17,9 @@ export function FeaturedCases() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {FEATURED_CASES.map((caseItem) => (
-          <div
+          <Link
             key={caseItem.brand}
+            href={`/cases/${caseItem.slug}`}
             className="group rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden hover:border-[var(--color-teal)]/50 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(16,192,176,0.1)]"
           >
             {/* Thumbnail placeholder */}
@@ -36,6 +38,12 @@ export function FeaturedCases() {
                 </div>
                 <span className="text-xs font-medium text-[var(--color-text-muted)]">
                   {caseItem.brand}
+                </span>
+              </div>
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-sm font-medium text-[var(--color-text)] border border-white/30 rounded-full px-4 py-2">
+                  Ver Case
                 </span>
               </div>
             </div>
@@ -57,7 +65,7 @@ export function FeaturedCases() {
                 com {caseItem.influencer}
               </p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 

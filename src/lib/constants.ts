@@ -28,14 +28,14 @@ export const CLIENT_LOGOS = [
 ];
 
 export const FEATURED_INFLUENCERS = [
-  { name: "Ronaldinho Gaúcho", handle: "@ronaldinho", niche: "Esporte", followers: "155.3M", color: "#00F0D0" },
-  { name: "Virgínia Fonseca", handle: "@virginia", niche: "Lifestyle", followers: "50.2M", color: "#80F090" },
-  { name: "Whindersson Nunes", handle: "@whindersson", niche: "Humor", followers: "59.1M", color: "#D0F060" },
-  { name: "Juliette Freire", handle: "@juliette", niche: "Beleza", followers: "32.8M", color: "#E0F050" },
-  { name: "Casimiro Miguel", handle: "@casimiro", niche: "Esporte", followers: "15.7M", color: "#00F0D0" },
-  { name: "Jade Picon", handle: "@jadepicon", niche: "Moda", followers: "22.4M", color: "#80F090" },
-  { name: "Felipe Neto", handle: "@felipeneto", niche: "Entretenimento", followers: "46.3M", color: "#D0F060" },
-  { name: "Anitta", handle: "@anitta", niche: "Música", followers: "64.5M", color: "#E0F050" },
+  { name: "Ronaldinho Gaúcho", handle: "@ronaldinho", slug: "ronaldinho", niche: "Esporte", followers: "155.3M", color: "#00F0D0" },
+  { name: "Virgínia Fonseca", handle: "@virginia", slug: "virginia-fonseca", niche: "Lifestyle", followers: "50.2M", color: "#80F090" },
+  { name: "Whindersson Nunes", handle: "@whindersson", slug: "whindersson-nunes", niche: "Humor", followers: "59.1M", color: "#D0F060" },
+  { name: "Juliette Freire", handle: "@juliette", slug: "juliette-freire", niche: "Beleza", followers: "32.8M", color: "#E0F050" },
+  { name: "Casimiro Miguel", handle: "@casimiro", slug: "casimiro-miguel", niche: "Esporte", followers: "15.7M", color: "#00F0D0" },
+  { name: "Jade Picon", handle: "@jadepicon", slug: "jade-picon", niche: "Moda", followers: "22.4M", color: "#80F090" },
+  { name: "Felipe Neto", handle: "@felipeneto", slug: "felipe-neto", niche: "Entretenimento", followers: "46.3M", color: "#D0F060" },
+  { name: "Anitta", handle: "@anitta", slug: "anitta", niche: "Música", followers: "64.5M", color: "#E0F050" },
 ];
 
 export const COUNTERS = [
@@ -48,6 +48,7 @@ export const COUNTERS = [
 export const FEATURED_CASES = [
   {
     brand: "Nike",
+    slug: "nike-lancamento-chuteiras",
     influencer: "Ronaldinho Gaúcho",
     result: "2M views em 24h",
     description: "Campanha de lançamento da nova linha de chuteiras com conteúdo exclusivo para Instagram e TikTok.",
@@ -56,6 +57,7 @@ export const FEATURED_CASES = [
   },
   {
     brand: "Natura",
+    slug: "natura-beleza-natural",
     influencer: "Juliette Freire",
     result: "+340% engajamento",
     description: "Série de conteúdos sobre beleza natural que gerou recorde de engajamento para a marca.",
@@ -64,6 +66,7 @@ export const FEATURED_CASES = [
   },
   {
     brand: "iFood",
+    slug: "ifood-live-commerce",
     influencer: "Casimiro Miguel",
     result: "5M impressões",
     description: "Ação de live commerce com integração direta ao app, gerando conversões em tempo real.",

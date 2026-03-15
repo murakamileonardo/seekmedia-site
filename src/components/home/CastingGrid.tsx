@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FEATURED_INFLUENCERS } from "@/lib/constants";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Button } from "@/components/ui/Button";
@@ -16,8 +17,9 @@ export function CastingGrid() {
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
         {FEATURED_INFLUENCERS.map((influencer) => (
-          <div
+          <Link
             key={influencer.handle}
+            href={`/casting/${influencer.slug}`}
             className="group rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden hover:border-[var(--color-teal)]/50 hover:shadow-[0_0_40px_rgba(16,192,176,0.1)] transition-all duration-500 hover:-translate-y-1"
           >
             {/* Photo placeholder */}
@@ -60,7 +62,7 @@ export function CastingGrid() {
                 </span>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 
