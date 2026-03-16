@@ -1,5 +1,4 @@
 import { HeroScrollVideo } from "@/components/home/HeroScrollVideo";
-import { LogoCarousel } from "@/components/home/LogoCarousel";
 import { CastingGrid } from "@/components/home/CastingGrid";
 import { SocialProof } from "@/components/home/SocialProof";
 import { FeaturedCases } from "@/components/home/FeaturedCases";
@@ -11,7 +10,6 @@ export default function Home() {
   return (
     <>
       <HeroScrollVideo />
-      <LogoCarousel />
       <GradientBar />
       <CastingGrid />
       <SocialProof />

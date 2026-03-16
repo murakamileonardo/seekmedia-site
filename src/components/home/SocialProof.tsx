@@ -68,7 +68,7 @@ function CounterCard({
 export function SocialProof() {
   return (
     <SectionWrapper className="py-24">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+      <div className="grid grid-cols-3 gap-8 lg:gap-12">
         {COUNTERS.map((counter) => (
           <CounterCard
             key={counter.label}

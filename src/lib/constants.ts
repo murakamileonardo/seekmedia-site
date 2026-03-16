@@ -39,10 +39,9 @@ export const FEATURED_INFLUENCERS = [
 ];
 
 export const COUNTERS = [
-  { value: 500, suffix: "+", label: "Influenciadores" },
-  { value: 1200, suffix: "+", label: "Campanhas" },
-  { value: 300, suffix: "+", label: "Marcas Atendidas" },
   { value: 17.9, suffix: "M+", label: "Alcance em Impressões", decimals: 1 },
+  { value: 10, suffix: "+", label: "Anos de Experiência" },
+  { value: 500, suffix: "+", label: "Impactos Gerados" },
 ];
 
 export const FEATURED_CASES = [
@@ -91,11 +90,11 @@ export const SERVICES = [
     features: ["Direção criativa e roteiro", "Filmagem profissional", "Edição e pós-produção", "Motion design e animação"],
   },
   {
-    title: "Estratégia e Planejamento",
-    description: "Consultoria, mapeamento de influenciadores, análise de dados e planejamento de campanhas 360°.",
+    title: "Projetos Especiais",
+    description: "Eventos, ativações, collabs exclusivas e projetos sob medida que conectam marcas e criadores de forma única.",
     icon: "strategy",
-    longDescription: "Desenvolvemos estratégias baseadas em dados para maximizar o ROI das suas campanhas de influência. Analisamos seu mercado, público-alvo e concorrência para criar um plano de ação sob medida que conecte sua marca aos criadores certos, nos momentos certos.",
-    features: ["Análise de mercado e benchmarking", "Mapeamento de público-alvo", "Planejamento de campanhas 360°", "Métricas e otimização contínua"],
+    longDescription: "Criamos experiências memoráveis que vão além do digital. De eventos presenciais a ativações de marca, collabs entre criadores e lançamentos exclusivos — cada projeto é desenhado sob medida para gerar impacto real e conexões autênticas entre marcas e seus públicos.",
+    features: ["Eventos e ativações de marca", "Collabs exclusivas entre criadores", "Lançamentos e campanhas especiais", "Experiências imersivas e inovadoras"],
   },
 ];
 

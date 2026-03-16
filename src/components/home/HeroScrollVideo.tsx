@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { Button } from "@/components/ui/Button";
+import { CLIENT_LOGOS } from "@/lib/constants";
 
 interface HeroScrollVideoProps {
   videoSrc?: string;
@@ -25,10 +26,13 @@ export function HeroScrollVideo({ videoSrc }: HeroScrollVideoProps) {
   // Scroll indicator fades out quickly
   const scrollIndicatorOpacity = progress < 0.05 ? 1 : progress > 0.15 ? 0 : 1 - (progress - 0.05) / 0.1;
 
+  // Logo carousel — duplicate for seamless loop
+  const allLogos = [...CLIENT_LOGOS, ...CLIENT_LOGOS];
+
   return (
     <div ref={containerRef} className="relative h-[300vh]">
       {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col">
         {/* Video or Placeholder Background */}
         {videoSrc ? (
           <video
@@ -60,7 +64,7 @@ export function HeroScrollVideo({ videoSrc }: HeroScrollVideoProps) {
 
         {/* Text Content */}
         <div
-          className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center"
+          className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center pb-28"
           style={{
             opacity: textOpacity,
             transform: `translateY(${textTranslateY}px)`,
@@ -86,21 +90,46 @@ export function HeroScrollVideo({ videoSrc }: HeroScrollVideoProps) {
           </div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Client Logo Carousel — above scroll indicator */}
+        <div className="absolute bottom-16 left-0 right-0 z-10">
+          <p className="text-center text-[10px] sm:text-xs text-[var(--color-text-muted)] uppercase tracking-widest mb-4 font-medium">
+            Marcas que confiam na SeekMedia
+          </p>
+          <div className="overflow-hidden" role="marquee" aria-label="Logos de clientes">
+            <div
+              className="flex gap-10 items-center w-max"
+              style={{ animation: "scroll-left 30s linear infinite" }}
+            >
+              {allLogos.map((logo, i) => (
+                <div
+                  key={`${logo}-${i}`}
+                  className="flex-shrink-0 w-24 h-10 rounded-lg bg-white/[0.06] flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default"
+                  aria-hidden={i >= CLIENT_LOGOS.length}
+                >
+                  <span className="text-[10px] font-semibold text-[var(--color-text-muted)] select-none">
+                    {logo}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll indicator — pinned at very bottom */}
         <div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          className="absolute bottom-3 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-10"
           style={{ opacity: scrollIndicatorOpacity }}
         >
-          <span className="text-xs text-[var(--color-text-muted)] uppercase tracking-widest">
+          <span className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-widest">
             Scroll
           </span>
-          <div className="w-5 h-8 rounded-full border-2 border-[var(--color-text-muted)]/50 flex justify-center pt-1.5">
-            <div className="w-1 h-2 bg-[var(--color-accent-cyan)] rounded-full animate-bounce" />
+          <div className="w-4 h-6 rounded-full border-2 border-[var(--color-text-muted)]/50 flex justify-center pt-1">
+            <div className="w-0.5 h-1.5 bg-[var(--color-accent-cyan)] rounded-full animate-bounce" />
           </div>
         </div>
 
         {/* Bottom gradient fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[var(--color-bg)] to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[var(--color-bg)] to-transparent pointer-events-none" />
       </div>
     </div>
   );
