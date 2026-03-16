@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Metadata } from "next";
 import { GradientBar } from "@/components/ui/GradientBar";
 import { ContatoClient } from "@/components/contato/ContatoClient";
@@ -12,7 +13,9 @@ export default function ContatoPage() {
   return (
     <>
       <GradientBar />
-      <ContatoClient />
+      <Suspense>
+        <ContatoClient />
+      </Suspense>
       <GradientBar />
     </>
   );
