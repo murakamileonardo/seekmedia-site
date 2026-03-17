@@ -27,16 +27,7 @@ export const CLIENT_LOGOS = [
   "Adidas",
 ];
 
-export const FEATURED_INFLUENCERS = [
-  { name: "Ronaldinho Gaúcho", handle: "@ronaldinho", slug: "ronaldinho", niche: "Esporte", followers: "155.3M", color: "#00F0D0" },
-  { name: "Virgínia Fonseca", handle: "@virginia", slug: "virginia-fonseca", niche: "Lifestyle", followers: "50.2M", color: "#80F090" },
-  { name: "Whindersson Nunes", handle: "@whindersson", slug: "whindersson-nunes", niche: "Humor", followers: "59.1M", color: "#D0F060" },
-  { name: "Juliette Freire", handle: "@juliette", slug: "juliette-freire", niche: "Beleza", followers: "32.8M", color: "#E0F050" },
-  { name: "Casimiro Miguel", handle: "@casimiro", slug: "casimiro-miguel", niche: "Esporte", followers: "15.7M", color: "#00F0D0" },
-  { name: "Jade Picon", handle: "@jadepicon", slug: "jade-picon", niche: "Moda", followers: "22.4M", color: "#80F090" },
-  { name: "Felipe Neto", handle: "@felipeneto", slug: "felipe-neto", niche: "Entretenimento", followers: "46.3M", color: "#D0F060" },
-  { name: "Anitta", handle: "@anitta", slug: "anitta", niche: "Música", followers: "64.5M", color: "#E0F050" },
-];
+// FEATURED_INFLUENCERS is defined after ALL_INFLUENCERS (see below)
 
 export const COUNTERS = [
   { value: 17.9, suffix: "M+", label: "Alcance em Impressões", decimals: 1 },
@@ -134,6 +125,11 @@ export const ALL_INFLUENCERS: Influencer[] = [
   { name: "Camila Coelho", handle: "@camilacoelho", slug: "camila-coelho", niche: "Moda", followers: "10.1M", engagement: "3.5%", platforms: ["Instagram", "YouTube"], bio: "Influenciadora e empresária de moda, referência internacional em beleza e estilo.", color: "#80F090", badges: [], order: 11 },
   { name: "Eliezer", handle: "@eliezer", slug: "eliezer", niche: "Lifestyle", followers: "8.9M", engagement: "5.6%", platforms: ["Instagram", "TikTok"], bio: "Criador de conteúdo de lifestyle e paternidade, com forte conexão com seu público.", color: "#D0F060", badges: ["Novo"], order: 12 },
 ];
+
+const FEATURED_SLUGS = ["ronaldinho", "anitta", "whindersson-nunes", "virginia-fonseca", "felipe-neto", "juliette-freire", "jade-picon", "casimiro-miguel"];
+export const FEATURED_INFLUENCERS = FEATURED_SLUGS.map(
+  (slug) => ALL_INFLUENCERS.find((i) => i.slug === slug)!
+);
 
 export const ALL_CASES = [
   {

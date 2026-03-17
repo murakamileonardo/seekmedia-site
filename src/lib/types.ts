@@ -27,11 +27,11 @@ export const BADGE_OPTIONS = [
 export type BadgeType = (typeof BADGE_OPTIONS)[number];
 
 export const BADGE_STYLES: Record<BadgeType, { bg: string; text: string }> = {
-  "Em alta": { bg: "rgba(0, 240, 208, 0.25)", text: "#00F0D0" },
-  "Top of mind": { bg: "rgba(224, 240, 80, 0.25)", text: "#E0F050" },
-  "Novo": { bg: "rgba(128, 240, 144, 0.25)", text: "#80F090" },
-  "Exclusivo": { bg: "rgba(208, 240, 96, 0.25)", text: "#D0F060" },
-  "Destaque": { bg: "rgba(16, 192, 176, 0.25)", text: "#10C0B0" },
+  "Em alta": { bg: "rgba(239, 68, 68, 0.25)", text: "#EF4444" },
+  "Top of mind": { bg: "rgba(168, 85, 247, 0.25)", text: "#A855F7" },
+  "Novo": { bg: "rgba(239, 68, 68, 0.20)", text: "#F87171" },
+  "Exclusivo": { bg: "rgba(168, 85, 247, 0.20)", text: "#C084FC" },
+  "Destaque": { bg: "rgba(236, 72, 153, 0.25)", text: "#EC4899" },
 };
 
 /** Parse follower string like "155.3M" or "8.9K" to a number */

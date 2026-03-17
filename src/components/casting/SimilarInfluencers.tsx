@@ -56,7 +56,7 @@ export function SimilarInfluencers({ currentSlug, currentNiche }: SimilarInfluen
 
               {/* Badges */}
               {inf.badges && inf.badges.length > 0 && (
-                <div className="absolute top-1.5 left-1.5 flex flex-col gap-0.5 z-10">
+                <div className="absolute top-2 right-2 flex flex-col gap-0.5 z-10">
                   {inf.badges.slice(0, 1).map((badge) => {
                     const style = BADGE_STYLES[badge as BadgeType] || { bg: "rgba(0,240,208,0.25)", text: "#00F0D0" };
                     return (

@@ -2,6 +2,8 @@ import Link from "next/link";
 import { FEATURED_INFLUENCERS } from "@/lib/constants";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Button } from "@/components/ui/Button";
+import { BADGE_STYLES } from "@/lib/types";
+import type { BadgeType } from "@/lib/types";
 
 export function CastingGrid() {
   return (
@@ -37,6 +39,29 @@ export function CastingGrid() {
                   }}
                 />
               </div>
+
+              {/* Badges */}
+              {influencer.badges && influencer.badges.length > 0 && (
+                <div className="absolute top-3 right-3 flex flex-col gap-1 z-10">
+                  {influencer.badges.map((badge) => {
+                    const style = BADGE_STYLES[badge as BadgeType] || { bg: "rgba(239,68,68,0.25)", text: "#EF4444" };
+                    return (
+                      <span
+                        key={badge}
+                        className="text-[10px] font-bold px-2 py-0.5 rounded-full backdrop-blur-sm"
+                        style={{
+                          backgroundColor: style.bg,
+                          color: style.text,
+                          border: `1px solid ${style.text}40`,
+                        }}
+                      >
+                        {badge}
+                      </span>
+                    );
+                  })}
+                </div>
+              )}
+
               {/* Hover overlay */}
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <span className="text-sm font-semibold text-[var(--color-accent-cyan)]">
