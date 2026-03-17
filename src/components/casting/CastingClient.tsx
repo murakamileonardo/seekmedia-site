@@ -48,7 +48,8 @@ export function CastingClient() {
   const filtered = useMemo(() => {
     return influencers
       .filter((inf) => {
-        if (selectedNiches.length > 0 && !selectedNiches.includes(inf.niche)) return false;
+        if (inf.active === false) return false;
+        if (selectedNiches.length > 0 && !inf.niches.some((n) => selectedNiches.includes(n))) return false;
         if (debouncedQuery && !inf.name.toLowerCase().includes(debouncedQuery.toLowerCase())) return false;
         return true;
       })
@@ -178,19 +179,25 @@ export function CastingClient() {
             href={`/casting/${inf.slug}`}
             className="group rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden hover:border-[var(--color-teal)]/50 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(16,192,176,0.08)]"
           >
-            {/* Photo placeholder */}
+            {/* Photo */}
             <div className="aspect-square bg-[var(--color-surface-elevated)] relative overflow-hidden">
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: `linear-gradient(135deg, ${inf.color}15, transparent 60%)`,
-                }}
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-5xl font-bold" style={{ color: `${inf.color}30` }}>
-                  {inf.name[0]}
-                </span>
-              </div>
+              {inf.photoUrl ? (
+                <img src={inf.photoUrl} alt={inf.name} className="absolute inset-0 w-full h-full object-cover" />
+              ) : (
+                <>
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: `linear-gradient(135deg, ${inf.color}15, transparent 60%)`,
+                    }}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-5xl font-bold" style={{ color: `${inf.color}30` }}>
+                      {inf.name[0]}
+                    </span>
+                  </div>
+                </>
+              )}
 
               {/* Badges */}
               {inf.badges && inf.badges.length > 0 && (
@@ -225,18 +232,23 @@ export function CastingClient() {
             <div className="p-4">
               <h3 className="font-semibold text-[var(--color-text)] text-sm">{inf.name}</h3>
               <p className="text-xs text-[var(--color-text-muted)] mb-2">{inf.handle}</p>
-              <div className="flex items-center justify-between">
-                <span
-                  className="text-xs px-2 py-0.5 rounded-full border"
-                  style={{
-                    borderColor: `${inf.color}40`,
-                    color: inf.color,
-                    backgroundColor: `${inf.color}10`,
-                  }}
-                >
-                  {inf.niche}
-                </span>
-                <span className="text-xs font-semibold text-[var(--color-accent-cyan)]">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex gap-1 flex-wrap min-w-0">
+                  {inf.niches.map((niche) => (
+                    <span
+                      key={niche}
+                      className="text-xs px-2 py-0.5 rounded-full border"
+                      style={{
+                        borderColor: `${inf.color}40`,
+                        color: inf.color,
+                        backgroundColor: `${inf.color}10`,
+                      }}
+                    >
+                      {niche}
+                    </span>
+                  ))}
+                </div>
+                <span className="text-xs font-semibold text-[var(--color-accent-cyan)] shrink-0">
                   {inf.followers}
                 </span>
               </div>

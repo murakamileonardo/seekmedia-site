@@ -4,7 +4,7 @@ export interface Influencer {
   name: string;
   handle: string;
   slug: string;
-  niche: string;
+  niches: string[];
   followers: string;
   engagement: string;
   platforms: string[];
@@ -14,6 +14,29 @@ export interface Influencer {
   order: number;
   socialLinks?: Record<string, string>;
   photoUrl?: string;
+  active?: boolean;
+}
+
+/** Map social link keys to platform display names */
+export const SOCIAL_TO_PLATFORM: Record<string, string> = {
+  instagram: "Instagram",
+  tiktok: "TikTok",
+  youtube: "YouTube",
+  twitter: "X",
+  linkedin: "LinkedIn",
+};
+
+/** Derive platforms array from social links */
+export function derivePlatforms(socialLinks?: Record<string, string>): string[] {
+  if (!socialLinks) return [];
+  return Object.keys(socialLinks)
+    .map((key) => SOCIAL_TO_PLATFORM[key])
+    .filter(Boolean);
+}
+
+/** Validate follower count format (must end in M or K) */
+export function isValidFollowerFormat(str: string): boolean {
+  return /^\d+(\.\d+)?[MmKk]$/.test(str.trim());
 }
 
 export const BADGE_OPTIONS = [

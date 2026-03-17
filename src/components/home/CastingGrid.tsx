@@ -24,21 +24,25 @@ export function CastingGrid() {
             href={`/casting/${influencer.slug}`}
             className="group rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden hover:border-[var(--color-teal)]/50 hover:shadow-[0_0_40px_rgba(16,192,176,0.1)] transition-all duration-500 hover:-translate-y-1"
           >
-            {/* Photo placeholder */}
+            {/* Photo */}
             <div
               className="aspect-[3/4] w-full relative overflow-hidden"
               style={{
-                background: `linear-gradient(135deg, ${influencer.color}15, var(--color-surface-elevated))`,
+                background: influencer.photoUrl ? undefined : `linear-gradient(135deg, ${influencer.color}15, var(--color-surface-elevated))`,
               }}
             >
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div
-                  className="w-20 h-20 rounded-full opacity-30"
-                  style={{
-                    background: `linear-gradient(135deg, ${influencer.color}, var(--color-teal))`,
-                  }}
-                />
-              </div>
+              {influencer.photoUrl ? (
+                <img src={influencer.photoUrl} alt={influencer.name} className="absolute inset-0 w-full h-full object-cover" />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div
+                    className="w-20 h-20 rounded-full opacity-30"
+                    style={{
+                      background: `linear-gradient(135deg, ${influencer.color}, var(--color-teal))`,
+                    }}
+                  />
+                </div>
+              )}
 
               {/* Badges */}
               {influencer.badges && influencer.badges.length > 0 && (
@@ -80,7 +84,7 @@ export function CastingGrid() {
               </p>
               <div className="flex items-center justify-between">
                 <span className="text-xs px-2 py-0.5 rounded-full bg-[var(--color-accent-cyan)]/10 text-[var(--color-accent-cyan)]">
-                  {influencer.niche}
+                  {influencer.niches[0]}
                 </span>
                 <span className="text-xs font-semibold text-[var(--color-accent-cyan)]">
                   {influencer.followers}

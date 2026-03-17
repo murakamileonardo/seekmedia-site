@@ -50,9 +50,9 @@ body {
 }
 
 @utility gradient-bar {
-  height: 6px;
+  height: 1px;
   background: linear-gradient(90deg, #00F0D0, #40F0A0, #80F090, #B0F070, #D0F060, #E0F050);
-  border-radius: 3px;
+  opacity: 0.5;
 }
 
 /* ═══ Keyframes ═══ */

@@ -82,9 +82,24 @@ export function useInfluencerStore() {
       const next = { ...overrides, [slug]: updated };
 
       // If slug changed, remove old key
+      const finalSlug = partial.slug && partial.slug !== slug ? partial.slug : slug;
       if (partial.slug && partial.slug !== slug) {
         delete next[slug];
         next[partial.slug] = updated;
+      }
+
+      // Reorder logic: if order changed, shift others at that position and below
+      if (partial.order !== undefined) {
+        const targetOrder = partial.order;
+        const currentInfluencers = mergeInfluencers(overrides);
+
+        for (const inf of currentInfluencers) {
+          if (inf.slug === finalSlug) continue; // skip the one being updated
+          if (inf.order >= targetOrder) {
+            const infExisting = next[inf.slug] || ALL_INFLUENCERS.find((i) => i.slug === inf.slug);
+            next[inf.slug] = { ...(infExisting || inf), order: inf.order + 1 } as Influencer;
+          }
+        }
       }
 
       persist(next);

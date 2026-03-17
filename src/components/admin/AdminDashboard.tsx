@@ -178,7 +178,7 @@ function InfluencersTab() {
                   Nome
                 </th>
                 <th className="text-left py-3 px-4 text-xs font-medium text-[var(--color-text-muted)] uppercase tracking-wider">
-                  Nicho
+                  Nichos
                 </th>
                 <th className="text-left py-3 px-4 text-xs font-medium text-[var(--color-text-muted)] uppercase tracking-wider">
                   Seguidores
@@ -210,22 +210,24 @@ function InfluencersTab() {
                     {inf.order}
                   </td>
                   <td className="py-3 px-4">
-                    <div>
-                      <p className="font-medium text-[var(--color-text)]">{inf.name}</p>
-                      <p className="text-xs text-[var(--color-text-muted)]">{inf.handle}</p>
-                    </div>
+                    <p className="font-medium text-[var(--color-text)]">{inf.name}</p>
                   </td>
                   <td className="py-3 px-4">
-                    <span
-                      className="text-xs px-2 py-0.5 rounded-full border"
-                      style={{
-                        borderColor: `${inf.color}40`,
-                        color: inf.color,
-                        backgroundColor: `${inf.color}10`,
-                      }}
-                    >
-                      {inf.niche}
-                    </span>
+                    <div className="flex gap-1 flex-wrap">
+                      {inf.niches.map((niche) => (
+                        <span
+                          key={niche}
+                          className="text-[10px] px-1.5 py-0.5 rounded-full border"
+                          style={{
+                            borderColor: `${inf.color}40`,
+                            color: inf.color,
+                            backgroundColor: `${inf.color}10`,
+                          }}
+                        >
+                          {niche}
+                        </span>
+                      ))}
+                    </div>
                   </td>
                   <td className="py-3 px-4 text-[var(--color-text)]">{inf.followers}</td>
                   <td className="py-3 px-4 text-[var(--color-accent-cyan)]">{inf.engagement}</td>
@@ -258,23 +260,35 @@ function InfluencersTab() {
                     </div>
                   </td>
                   <td className="py-3 px-4">
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-[var(--color-accent-green)]/20 text-[var(--color-accent-green)]">
-                      Ativo
-                    </span>
+                    {inf.active !== false ? (
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-[var(--color-accent-green)]/20 text-[var(--color-accent-green)]">
+                        Ativo
+                      </span>
+                    ) : (
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-[var(--color-text-muted)]/20 text-[var(--color-text-muted)]">
+                        Inativo
+                      </span>
+                    )}
                   </td>
                   <td className="py-3 px-4">
-                    <div className="flex gap-2">
+                    <div className="flex items-center gap-1">
                       <button
                         onClick={() => handleEdit(inf)}
-                        className="text-xs text-[var(--color-accent-cyan)] hover:text-[var(--color-accent-cyan)]/80 cursor-pointer transition-colors"
+                        className="p-1.5 rounded-lg text-[var(--color-text-muted)] hover:text-yellow-400 hover:bg-yellow-400/10 cursor-pointer transition-all duration-200"
+                        title="Editar"
                       >
-                        Editar
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </svg>
                       </button>
                       <button
                         onClick={() => handleDelete(inf.slug, inf.name)}
-                        className="text-xs text-red-400 hover:text-red-300 cursor-pointer transition-colors"
+                        className="p-1.5 rounded-lg text-[var(--color-text-muted)] hover:text-red-400 hover:bg-red-400/10 cursor-pointer transition-all duration-200"
+                        title="Excluir"
                       >
-                        Excluir
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
                       </button>
                     </div>
                   </td>
