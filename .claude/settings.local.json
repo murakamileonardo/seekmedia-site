@@ -14,7 +14,23 @@
       "Bash(cp \"/Users/leonardo/Downloads/Logo Seek quadrado.jpg\" /Users/leonardo/Documents/Claude_CODE/SeekSite/public/images/logo-seekmedia-square.jpg)",
       "Bash(cp \"/Users/leonardo/Downloads/Logo Seek quadrad.jpg\" /Users/leonardo/Documents/Claude_CODE/SeekSite/public/images/logo-seekmedia-square-alt.jpg)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"Initial Next.js + Tailwind project setup for SeekMedia:*)"
+      "Bash(git commit -m \"Initial Next.js + Tailwind project setup for SeekMedia:*)",
+      "Bash(gh repo:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(nvm --version)",
+      "Bash(fnm --version)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(pandoc \"/Users/leonardo/Documents/AI-Class/SeekMedia_Simulador_MiniSpec_v2.docx\" -o /tmp/simulador_spec.md)",
+      "Read(//tmp/**)",
+      "Bash(unzip -o \"/Users/leonardo/Documents/AI-Class/SeekMedia_Simulador_MiniSpec_v2.docx\" -d seekmedia_spec_unpacked)",
+      "Bash(python3 -c \":*)",
+      "Bash(python3:*)",
+      "Bash(source ~/.nvm/nvm.sh)",
+      "Bash(nvm use:*)",
+      "Bash(npx next:*)",
+      "Bash(find /Users/leonardo/Documents/Claude_CODE/SeekSite/src/app/api -type f -name *.ts -o -name *.tsx)",
+      "Bash(gh run:*)"
     ]
   }
 }

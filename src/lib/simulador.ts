@@ -24,12 +24,26 @@ export type BudgetRange = "ate20k" | "20k-50k" | "50k-150k" | "150k+";
 export type Prazo = "urgente" | "normal" | "planejado";
 export type Abrangencia = "nada-nichado" | "pouco-nichado" | "nichado" | "muito-nichado";
 
+export interface PlatformFlags {
+  instagram: boolean;
+  kick: boolean;
+  kwai: boolean;
+  tiktok: boolean;
+  tiktokLive: boolean;
+  twitch: boolean;
+  twitter: boolean;
+  youtube: boolean;
+  youtubeLive: boolean;
+}
+
+export const LIVE_PLATFORM_KEYS: (keyof PlatformFlags)[] = ["kick", "tiktokLive", "twitch", "youtubeLive"];
+
 export interface BrandInputs {
   objetivo: number; // 0=100% Branding, 100=100% Performance
   orcamento: BudgetRange;
   prazo: Prazo;
   criadores: number; // 1-10+
-  plataformas: { instagram: boolean; tiktok: boolean; youtube: boolean };
+  plataformas: PlatformFlags;
   abrangencia: Abrangencia;
 }
 
@@ -67,7 +81,7 @@ export type LiveHoursRange = "<10h" | "10-20h" | "20-40h" | "40-80h" | "80h+";
 export interface InfluencerInputs {
   seguidores: FollowerRange;
   engajamento: EngagementRange;
-  plataformas: { instagram: boolean; tiktok: boolean; youtube: boolean; twitch: boolean; twitter: boolean };
+  plataformas: PlatformFlags;
   nicho: NichoLevel;
   experiencia: ExperienciaMarcas;
   fazLives: boolean;
@@ -774,19 +788,24 @@ export function getLiveConclusion(inputs: InfluencerInputs): LiveConclusion | nu
 }
 
 // ── Default Inputs ──
+export const DEFAULT_PLATFORMS: PlatformFlags = {
+  instagram: true, kick: false, kwai: false, tiktok: false,
+  tiktokLive: false, twitch: false, twitter: false, youtube: false, youtubeLive: false,
+};
+
 export const DEFAULT_BRAND_INPUTS: BrandInputs = {
   objetivo: 50,
   orcamento: "20k-50k",
   prazo: "normal",
   criadores: 3,
-  plataformas: { instagram: true, tiktok: false, youtube: false },
+  plataformas: { ...DEFAULT_PLATFORMS },
   abrangencia: "pouco-nichado",
 };
 
 export const DEFAULT_INFLUENCER_INPUTS: InfluencerInputs = {
   seguidores: "10-50k",
   engajamento: "5-10",
-  plataformas: { instagram: true, tiktok: false, youtube: false, twitch: false, twitter: false },
+  plataformas: { ...DEFAULT_PLATFORMS },
   nicho: "pouco-nichado",
   experiencia: "poucas",
   fazLives: false,

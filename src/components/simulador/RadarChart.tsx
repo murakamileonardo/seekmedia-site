@@ -57,7 +57,7 @@ export function RadarChart({ axes }: RadarChartProps) {
 
       const cx = size / 2;
       const cy = size / 2;
-      const radius = size * 0.32;
+      const radius = size * 0.28;
       const angleStep = (Math.PI * 2) / n;
       const startAngle = -Math.PI / 2;
 
@@ -139,7 +139,7 @@ export function RadarChart({ axes }: RadarChartProps) {
       // Labels + qualitative level
       for (let i = 0; i < n; i++) {
         const angle = startAngle + angleStep * i;
-        const labelR = radius + 32;
+        const labelR = radius + 40;
         const x = cx + Math.cos(angle) * labelR;
         const y = cy + Math.sin(angle) * labelR;
 
