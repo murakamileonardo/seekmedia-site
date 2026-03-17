@@ -1,27 +1,35 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import type { RadarData } from "@/lib/simulador";
+import type { QualitativeLevel } from "@/lib/simulador";
+import { levelToPercent } from "@/lib/simulador";
 
-interface RadarChartProps {
-  data: RadarData;
+export interface RadarAxis {
+  label: string;
+  level: QualitativeLevel;
 }
 
-const LABELS = ["Alcance", "Engajamento", "Durabilidade", "Custo", "Complexidade"];
-const KEYS: (keyof RadarData)[] = ["alcance", "engajamento", "durabilidade", "custo", "complexidade"];
+interface RadarChartProps {
+  axes: RadarAxis[];
+}
 
-export function RadarChart({ data }: RadarChartProps) {
+export function RadarChart({ axes }: RadarChartProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animatedRef = useRef<number[]>([0, 0, 0, 0, 0]);
+  const animatedRef = useRef<number[]>(axes.map(() => 0));
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
 
-    const targetValues = KEYS.map((k) => data[k] / 100);
+    const n = axes.length;
+    const targetValues = axes.map((a) => levelToPercent(a.level) / 100);
+
+    // Ensure animatedRef matches axis count
+    if (animatedRef.current.length !== n) {
+      animatedRef.current = new Array(n).fill(0);
+    }
+
     const startValues = [...animatedRef.current];
     const startTime = performance.now();
     const duration = 600;
@@ -49,18 +57,18 @@ export function RadarChart({ data }: RadarChartProps) {
 
       const cx = size / 2;
       const cy = size / 2;
-      const radius = size * 0.35;
-      const angleStep = (Math.PI * 2) / 5;
+      const radius = size * 0.32;
+      const angleStep = (Math.PI * 2) / n;
       const startAngle = -Math.PI / 2;
 
       ctx.clearRect(0, 0, size, size);
 
-      // Grid rings
+      // Grid rings (4 rings for 4 levels)
       for (let ring = 1; ring <= 4; ring++) {
         const r = (radius * ring) / 4;
         ctx.beginPath();
-        for (let i = 0; i <= 5; i++) {
-          const angle = startAngle + angleStep * (i % 5);
+        for (let i = 0; i <= n; i++) {
+          const angle = startAngle + angleStep * (i % n);
           const x = cx + Math.cos(angle) * r;
           const y = cy + Math.sin(angle) * r;
           if (i === 0) ctx.moveTo(x, y);
@@ -73,7 +81,7 @@ export function RadarChart({ data }: RadarChartProps) {
       }
 
       // Axis lines
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < n; i++) {
         const angle = startAngle + angleStep * i;
         ctx.beginPath();
         ctx.moveTo(cx, cy);
@@ -85,8 +93,8 @@ export function RadarChart({ data }: RadarChartProps) {
 
       // Data polygon
       ctx.beginPath();
-      for (let i = 0; i <= 5; i++) {
-        const idx = i % 5;
+      for (let i = 0; i <= n; i++) {
+        const idx = i % n;
         const angle = startAngle + angleStep * idx;
         const r = radius * current[idx];
         const x = cx + Math.cos(angle) * r;
@@ -96,7 +104,7 @@ export function RadarChart({ data }: RadarChartProps) {
       }
       ctx.closePath();
 
-      // Fill with gradient
+      // Fill
       const gradient = ctx.createLinearGradient(cx - radius, cy - radius, cx + radius, cy + radius);
       gradient.addColorStop(0, "rgba(0, 240, 208, 0.2)");
       gradient.addColorStop(0.5, "rgba(128, 240, 144, 0.15)");
@@ -114,7 +122,7 @@ export function RadarChart({ data }: RadarChartProps) {
       ctx.stroke();
 
       // Data points
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < n; i++) {
         const angle = startAngle + angleStep * i;
         const r = radius * current[i];
         const x = cx + Math.cos(angle) * r;
@@ -128,24 +136,23 @@ export function RadarChart({ data }: RadarChartProps) {
         ctx.stroke();
       }
 
-      // Labels
-      ctx.font = "12px Inter, system-ui, sans-serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      for (let i = 0; i < 5; i++) {
+      // Labels + qualitative level
+      for (let i = 0; i < n; i++) {
         const angle = startAngle + angleStep * i;
-        const labelR = radius + 28;
+        const labelR = radius + 32;
         const x = cx + Math.cos(angle) * labelR;
         const y = cy + Math.sin(angle) * labelR;
-        ctx.fillStyle = "#8899A0";
-        ctx.fillText(LABELS[i], x, y);
 
-        // Value
-        const val = Math.round(current[i] * 100);
-        ctx.font = "bold 11px Inter, system-ui, sans-serif";
+        ctx.font = "11px Inter, system-ui, sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "#8899A0";
+        ctx.fillText(axes[i].label, x, y);
+
+        // Qualitative level below
+        ctx.font = "bold 10px Inter, system-ui, sans-serif";
         ctx.fillStyle = "#00F0D0";
-        ctx.fillText(String(val), x, y + 15);
-        ctx.font = "12px Inter, system-ui, sans-serif";
+        ctx.fillText(axes[i].level, x, y + 14);
       }
 
       if (progress < 1) {
@@ -155,7 +162,7 @@ export function RadarChart({ data }: RadarChartProps) {
 
     rafRef.current = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [data]);
+  }, [axes]);
 
   return (
     <div className="flex items-center justify-center w-full">
