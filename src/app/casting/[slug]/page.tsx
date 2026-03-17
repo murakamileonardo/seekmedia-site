@@ -109,15 +109,14 @@ export default async function PerfilPage({ params }: Props) {
             </div>
           </div>
         </div>
-      </SectionWrapper>
-
-      {/* Similar Influencers */}
-      <SectionWrapper>
-        <div className="py-4">
+        {/* Similar Influencers */}
+        <div className="mt-12">
           <h2 className="text-xl font-bold mb-6">
             Criadores <span className="text-gradient">Similares</span>
           </h2>
-          <SimilarInfluencers currentSlug={influencer.slug} currentNiche={influencer.niche} />
+          <div className="pt-1">
+            <SimilarInfluencers currentSlug={influencer.slug} currentNiche={influencer.niche} />
+          </div>
         </div>
       </SectionWrapper>
 

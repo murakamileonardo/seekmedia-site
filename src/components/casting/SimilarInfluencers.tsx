@@ -27,7 +27,7 @@ export function SimilarInfluencers({ currentSlug, currentNiche }: SimilarInfluen
   const items = [...similar, ...similar];
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden pt-2 -mt-2">
       <div
         className="flex gap-5 w-max pause-on-hover"
         style={{
