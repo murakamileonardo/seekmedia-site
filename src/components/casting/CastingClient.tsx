@@ -11,7 +11,6 @@ import type { BadgeType } from "@/lib/types";
 export function CastingClient() {
   const { influencers } = useInfluencerStore();
   const [nicheFilter, setNicheFilter] = useState("Todos");
-  const [platformFilter, setPlatformFilter] = useState("Todas");
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
 
@@ -25,12 +24,11 @@ export function CastingClient() {
     return influencers
       .filter((inf) => {
         if (nicheFilter !== "Todos" && inf.niche !== nicheFilter) return false;
-        if (platformFilter !== "Todas" && !inf.platforms.includes(platformFilter)) return false;
         if (debouncedQuery && !inf.name.toLowerCase().includes(debouncedQuery.toLowerCase())) return false;
         return true;
       })
       .sort((a, b) => a.order - b.order);
-  }, [influencers, nicheFilter, platformFilter, debouncedQuery]);
+  }, [influencers, nicheFilter, debouncedQuery]);
 
   return (
     <SectionWrapper>
@@ -43,11 +41,11 @@ export function CastingClient() {
         </p>
       </div>
 
-      {/* Search */}
-      <div className="mb-6">
-        <div className="relative max-w-md">
+      {/* Search + Filters */}
+      <div className="flex flex-col sm:flex-row sm:items-end gap-4 mb-8">
+        <div className="relative w-full sm:w-56">
           <svg
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--color-text-muted)]"
+            className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[var(--color-text-muted)]"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -56,55 +54,26 @@ export function CastingClient() {
           </svg>
           <input
             type="text"
-            placeholder="Buscar por nome..."
+            placeholder="Buscar..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 rounded-full text-sm bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent-cyan)] focus:ring-1 focus:ring-[var(--color-accent-cyan)]/30 transition-all duration-300"
+            className="w-full pl-8 pr-3 py-1.5 rounded-full text-xs bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent-cyan)] focus:ring-1 focus:ring-[var(--color-accent-cyan)]/30 transition-all duration-300"
           />
         </div>
-      </div>
-
-      {/* Filters */}
-      <div className="flex flex-wrap gap-6 mb-8">
-        <div>
-          <label className="block text-xs font-medium text-[var(--color-text-muted)] mb-2 uppercase tracking-wider">
-            Nicho
-          </label>
-          <div className="flex flex-wrap gap-1.5">
-            {CASTING_FILTERS.niches.map((niche) => (
-              <button
-                key={niche}
-                onClick={() => setNicheFilter(niche)}
-                className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer ${
-                  nicheFilter === niche
-                    ? "bg-[var(--color-accent-cyan)]/20 text-[var(--color-accent-cyan)] border border-[var(--color-accent-cyan)]/50"
-                    : "bg-[var(--color-surface)] text-[var(--color-text-muted)] border border-[var(--color-border)] hover:border-[var(--color-text-muted)]"
-                }`}
-              >
-                {niche}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div>
-          <label className="block text-xs font-medium text-[var(--color-text-muted)] mb-2 uppercase tracking-wider">
-            Plataforma
-          </label>
-          <div className="flex flex-wrap gap-1.5">
-            {CASTING_FILTERS.platforms.map((platform) => (
-              <button
-                key={platform}
-                onClick={() => setPlatformFilter(platform)}
-                className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer ${
-                  platformFilter === platform
-                    ? "bg-[var(--color-accent-cyan)]/20 text-[var(--color-accent-cyan)] border border-[var(--color-accent-cyan)]/50"
-                    : "bg-[var(--color-surface)] text-[var(--color-text-muted)] border border-[var(--color-border)] hover:border-[var(--color-text-muted)]"
-                }`}
-              >
-                {platform}
-              </button>
-            ))}
-          </div>
+        <div className="flex flex-wrap gap-1.5">
+          {CASTING_FILTERS.niches.map((niche) => (
+            <button
+              key={niche}
+              onClick={() => setNicheFilter(niche)}
+              className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer ${
+                nicheFilter === niche
+                  ? "bg-[var(--color-accent-cyan)]/20 text-[var(--color-accent-cyan)] border border-[var(--color-accent-cyan)]/50"
+                  : "bg-[var(--color-surface)] text-[var(--color-text-muted)] border border-[var(--color-border)] hover:border-[var(--color-text-muted)]"
+              }`}
+            >
+              {niche}
+            </button>
+          ))}
         </div>
       </div>
 
