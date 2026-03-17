@@ -34,7 +34,7 @@ export default function SobrePage() {
 
       {/* Numbers */}
       <SectionWrapper>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-3 gap-8">
           {COUNTERS.map((counter) => (
             <div key={counter.label} className="text-center">
               <p className="text-3xl sm:text-4xl font-extrabold text-gradient mb-2">
