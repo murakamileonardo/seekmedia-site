@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { CASTING_FILTERS } from "@/lib/constants";
@@ -10,9 +10,11 @@ import type { BadgeType } from "@/lib/types";
 
 export function CastingClient() {
   const { influencers } = useInfluencerStore();
-  const [nicheFilter, setNicheFilter] = useState("Todos");
+  const [selectedNiches, setSelectedNiches] = useState<string[]>([]);
+  const [nicheDropdownOpen, setNicheDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Debounce search
   useEffect(() => {
@@ -20,15 +22,38 @@ export function CastingClient() {
     return () => clearTimeout(timer);
   }, [searchQuery]);
 
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setNicheDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  const toggleNiche = (niche: string) => {
+    setSelectedNiches((prev) =>
+      prev.includes(niche) ? prev.filter((n) => n !== niche) : [...prev, niche]
+    );
+  };
+
+  const removeNiche = (niche: string) => {
+    setSelectedNiches((prev) => prev.filter((n) => n !== niche));
+  };
+
+  const nicheOptions = CASTING_FILTERS.niches.filter((n) => n !== "Todos");
+
   const filtered = useMemo(() => {
     return influencers
       .filter((inf) => {
-        if (nicheFilter !== "Todos" && inf.niche !== nicheFilter) return false;
+        if (selectedNiches.length > 0 && !selectedNiches.includes(inf.niche)) return false;
         if (debouncedQuery && !inf.name.toLowerCase().includes(debouncedQuery.toLowerCase())) return false;
         return true;
       })
       .sort((a, b) => a.order - b.order);
-  }, [influencers, nicheFilter, debouncedQuery]);
+  }, [influencers, selectedNiches, debouncedQuery]);
 
   return (
     <SectionWrapper>
@@ -41,8 +66,58 @@ export function CastingClient() {
         </p>
       </div>
 
-      {/* Search + Filters */}
-      <div className="flex flex-col sm:flex-row sm:items-end gap-4 mb-8">
+      {/* Filters row */}
+      <div className="flex items-center gap-3 mb-4">
+        {/* Niche dropdown */}
+        <div className="relative" ref={dropdownRef}>
+          <button
+            onClick={() => setNicheDropdownOpen(!nicheDropdownOpen)}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer border ${
+              selectedNiches.length > 0
+                ? "bg-[var(--color-accent-cyan)]/10 text-[var(--color-accent-cyan)] border-[var(--color-accent-cyan)]/40"
+                : "bg-[var(--color-surface)] text-[var(--color-text-muted)] border-[var(--color-border)] hover:border-[var(--color-text-muted)]"
+            }`}
+          >
+            <span>Nichos</span>
+            {selectedNiches.length > 0 && (
+              <span className="w-4 h-4 rounded-full bg-[var(--color-accent-cyan)] text-[#101818] text-[10px] font-bold flex items-center justify-center">
+                {selectedNiches.length}
+              </span>
+            )}
+            <svg className={`w-3 h-3 transition-transform duration-200 ${nicheDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          {nicheDropdownOpen && (
+            <div className="absolute top-full left-0 mt-1.5 w-48 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xl z-30 py-1.5 max-h-64 overflow-y-auto">
+              {nicheOptions.map((niche) => (
+                <button
+                  key={niche}
+                  onClick={() => toggleNiche(niche)}
+                  className="w-full flex items-center gap-2 px-3 py-1.5 text-xs text-left hover:bg-[var(--color-surface-elevated)] transition-colors cursor-pointer"
+                >
+                  <span className={`w-3.5 h-3.5 rounded border flex items-center justify-center shrink-0 transition-colors ${
+                    selectedNiches.includes(niche)
+                      ? "bg-[var(--color-accent-cyan)] border-[var(--color-accent-cyan)]"
+                      : "border-[var(--color-border)]"
+                  }`}>
+                    {selectedNiches.includes(niche) && (
+                      <svg className="w-2.5 h-2.5 text-[#101818]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    )}
+                  </span>
+                  <span className={selectedNiches.includes(niche) ? "text-[var(--color-text)]" : "text-[var(--color-text-muted)]"}>
+                    {niche}
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Search */}
         <div className="relative w-full sm:w-56">
           <svg
             className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[var(--color-text-muted)]"
@@ -60,22 +135,35 @@ export function CastingClient() {
             className="w-full pl-8 pr-3 py-1.5 rounded-full text-xs bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent-cyan)] focus:ring-1 focus:ring-[var(--color-accent-cyan)]/30 transition-all duration-300"
           />
         </div>
-        <div className="flex flex-wrap gap-1.5">
-          {CASTING_FILTERS.niches.map((niche) => (
-            <button
+      </div>
+
+      {/* Active niche tags */}
+      {selectedNiches.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {selectedNiches.map((niche) => (
+            <span
               key={niche}
-              onClick={() => setNicheFilter(niche)}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer ${
-                nicheFilter === niche
-                  ? "bg-[var(--color-accent-cyan)]/20 text-[var(--color-accent-cyan)] border border-[var(--color-accent-cyan)]/50"
-                  : "bg-[var(--color-surface)] text-[var(--color-text-muted)] border border-[var(--color-border)] hover:border-[var(--color-text-muted)]"
-              }`}
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-[var(--color-accent-cyan)]/15 text-[var(--color-accent-cyan)] border border-[var(--color-accent-cyan)]/30"
             >
               {niche}
-            </button>
+              <button
+                onClick={() => removeNiche(niche)}
+                className="hover:text-white transition-colors cursor-pointer ml-0.5"
+              >
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </span>
           ))}
+          <button
+            onClick={() => setSelectedNiches([])}
+            className="px-2 py-1 rounded-full text-[10px] text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors cursor-pointer"
+          >
+            Limpar
+          </button>
         </div>
-      </div>
+      )}
 
       {/* Results count */}
       <p className="text-sm text-[var(--color-text-muted)] mb-6">
