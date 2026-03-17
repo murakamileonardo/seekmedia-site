@@ -68,6 +68,20 @@ export function useInfluencerStore() {
   const addInfluencer = useCallback(
     (inf: Influencer) => {
       const next = { ...overrides, [inf.slug]: inf };
+
+      // Shift others to make room at the new influencer's position
+      const targetOrder = inf.order;
+      const currentInfluencers = mergeInfluencers(overrides);
+      const others = currentInfluencers.sort((a, b) => a.order - b.order);
+
+      let pos = 1;
+      for (const existing of others) {
+        if (pos === targetOrder) pos++; // skip the target slot
+        const existingOverride = next[existing.slug] || ALL_INFLUENCERS.find((i) => i.slug === existing.slug);
+        next[existing.slug] = { ...(existingOverride || existing), order: pos } as Influencer;
+        pos++;
+      }
+
       persist(next);
     },
     [overrides, persist]
@@ -88,18 +102,28 @@ export function useInfluencerStore() {
         next[partial.slug] = updated;
       }
 
-      // Reorder logic: if order changed, shift others at that position and below
+      // Reorder logic: if order changed, shift others to make room
       if (partial.order !== undefined) {
         const targetOrder = partial.order;
         const currentInfluencers = mergeInfluencers(overrides);
+        const oldOrder = currentInfluencers.find((i) => i.slug === finalSlug)?.order;
 
-        for (const inf of currentInfluencers) {
-          if (inf.slug === finalSlug) continue; // skip the one being updated
-          if (inf.order >= targetOrder) {
-            const infExisting = next[inf.slug] || ALL_INFLUENCERS.find((i) => i.slug === inf.slug);
-            next[inf.slug] = { ...(infExisting || inf), order: inf.order + 1 } as Influencer;
+        // Build clean ordered list excluding the moved influencer
+        const others = currentInfluencers
+          .filter((inf) => inf.slug !== finalSlug)
+          .sort((a, b) => a.order - b.order);
+
+        // Reassign sequential orders, inserting gap at targetOrder
+        let pos = 1;
+        for (const inf of others) {
+          if (pos === targetOrder) pos++; // skip the target slot
+          const infExisting = next[inf.slug] || ALL_INFLUENCERS.find((i) => i.slug === inf.slug);
+          if (inf.order !== pos || oldOrder !== undefined) {
+            next[inf.slug] = { ...(infExisting || inf), order: pos } as Influencer;
           }
+          pos++;
         }
+        // If target is beyond all others, no gap was made — it's fine, updated influencer just goes at end
       }
 
       persist(next);

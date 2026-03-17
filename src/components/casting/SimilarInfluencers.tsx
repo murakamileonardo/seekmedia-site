@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ALL_INFLUENCERS } from "@/lib/constants";
+import { useInfluencerStore } from "@/hooks/useInfluencerStore";
 import { BADGE_STYLES } from "@/lib/types";
 import type { BadgeType } from "@/lib/types";
 
@@ -11,14 +11,17 @@ interface SimilarInfluencersProps {
 }
 
 export function SimilarInfluencers({ currentSlug, currentNiches }: SimilarInfluencersProps) {
+  const { influencers } = useInfluencerStore();
+  const activeInfluencers = influencers.filter((inf) => inf.active !== false);
+
   // Filter by overlapping niches, exclude current
-  let similar = ALL_INFLUENCERS.filter(
+  let similar = activeInfluencers.filter(
     (inf) => inf.niches.some((n) => currentNiches.includes(n)) && inf.slug !== currentSlug
   );
 
   // Fallback: if fewer than 3 matches, show all except current
   if (similar.length < 3) {
-    similar = ALL_INFLUENCERS.filter((inf) => inf.slug !== currentSlug);
+    similar = activeInfluencers.filter((inf) => inf.slug !== currentSlug);
   }
 
   if (similar.length === 0) return null;
