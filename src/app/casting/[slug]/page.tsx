@@ -4,6 +4,7 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { GradientBar } from "@/components/ui/GradientBar";
 import { Button } from "@/components/ui/Button";
 import { ALL_INFLUENCERS } from "@/lib/constants";
+import { SimilarInfluencers } from "@/components/casting/SimilarInfluencers";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -109,6 +110,17 @@ export default async function PerfilPage({ params }: Props) {
           </div>
         </div>
       </SectionWrapper>
+
+      {/* Similar Influencers */}
+      <SectionWrapper>
+        <div className="py-4">
+          <h2 className="text-xl font-bold mb-6">
+            Criadores <span className="text-gradient">Similares</span>
+          </h2>
+          <SimilarInfluencers currentSlug={influencer.slug} currentNiche={influencer.niche} />
+        </div>
+      </SectionWrapper>
+
       <GradientBar />
     </>
   );

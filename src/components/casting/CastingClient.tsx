@@ -1,21 +1,36 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { ALL_INFLUENCERS, CASTING_FILTERS } from "@/lib/constants";
+import { CASTING_FILTERS } from "@/lib/constants";
+import { useInfluencerStore } from "@/hooks/useInfluencerStore";
+import { BADGE_STYLES } from "@/lib/types";
+import type { BadgeType } from "@/lib/types";
 
 export function CastingClient() {
+  const { influencers } = useInfluencerStore();
   const [nicheFilter, setNicheFilter] = useState("Todos");
   const [platformFilter, setPlatformFilter] = useState("Todas");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+
+  // Debounce search
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedQuery(searchQuery), 300);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
 
   const filtered = useMemo(() => {
-    return ALL_INFLUENCERS.filter((inf) => {
-      if (nicheFilter !== "Todos" && inf.niche !== nicheFilter) return false;
-      if (platformFilter !== "Todas" && !inf.platforms.includes(platformFilter)) return false;
-      return true;
-    });
-  }, [nicheFilter, platformFilter]);
+    return influencers
+      .filter((inf) => {
+        if (nicheFilter !== "Todos" && inf.niche !== nicheFilter) return false;
+        if (platformFilter !== "Todas" && !inf.platforms.includes(platformFilter)) return false;
+        if (debouncedQuery && !inf.name.toLowerCase().includes(debouncedQuery.toLowerCase())) return false;
+        return true;
+      })
+      .sort((a, b) => a.order - b.order);
+  }, [influencers, nicheFilter, platformFilter, debouncedQuery]);
 
   return (
     <SectionWrapper>
@@ -26,6 +41,27 @@ export function CastingClient() {
         <p className="text-[var(--color-text-muted)] max-w-xl mx-auto text-lg">
           Mais de 500 criadores prontos para conectar sua marca ao público certo
         </p>
+      </div>
+
+      {/* Search */}
+      <div className="mb-6">
+        <div className="relative max-w-md">
+          <svg
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--color-text-muted)]"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input
+            type="text"
+            placeholder="Buscar por nome..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-10 pr-4 py-2.5 rounded-full text-sm bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent-cyan)] focus:ring-1 focus:ring-[var(--color-accent-cyan)]/30 transition-all duration-300"
+          />
+        </div>
       </div>
 
       {/* Filters */}
@@ -98,6 +134,29 @@ export function CastingClient() {
                   {inf.name[0]}
                 </span>
               </div>
+
+              {/* Badges */}
+              {inf.badges && inf.badges.length > 0 && (
+                <div className="absolute top-2 left-2 flex flex-col gap-1 z-10">
+                  {inf.badges.map((badge) => {
+                    const style = BADGE_STYLES[badge as BadgeType] || { bg: "rgba(0,240,208,0.25)", text: "#00F0D0" };
+                    return (
+                      <span
+                        key={badge}
+                        className="text-[10px] font-bold px-2 py-0.5 rounded-full backdrop-blur-sm"
+                        style={{
+                          backgroundColor: style.bg,
+                          color: style.text,
+                          border: `1px solid ${style.text}40`,
+                        }}
+                      >
+                        {badge}
+                      </span>
+                    );
+                  })}
+                </div>
+              )}
+
               {/* Hover overlay */}
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span className="text-sm font-medium text-[var(--color-text)] border border-white/30 rounded-full px-4 py-2">

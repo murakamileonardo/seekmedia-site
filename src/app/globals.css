@@ -61,6 +61,13 @@ body {
   to { transform: translateX(-50%); }
 }
 
+/* ═══ Utility: pause carousel on hover ═══ */
+@utility pause-on-hover {
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
 @keyframes fade-in-up {
   from {
     opacity: 0;
