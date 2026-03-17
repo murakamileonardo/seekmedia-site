@@ -137,7 +137,7 @@ export function CastingClient() {
 
               {/* Badges */}
               {inf.badges && inf.badges.length > 0 && (
-                <div className="absolute top-3 right-3 flex flex-col gap-1 z-10">
+                <div className="absolute top-3 right-3 flex flex-col items-end gap-1 z-10">
                   {inf.badges.map((badge) => {
                     const style = BADGE_STYLES[badge as BadgeType] || { bg: "rgba(0,240,208,0.25)", text: "#00F0D0" };
                     return (

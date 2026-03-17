@@ -42,7 +42,7 @@ export function CastingGrid() {
 
               {/* Badges */}
               {influencer.badges && influencer.badges.length > 0 && (
-                <div className="absolute top-3 right-3 flex flex-col gap-1 z-10">
+                <div className="absolute top-3 right-3 flex flex-col items-end gap-1 z-10">
                   {influencer.badges.map((badge) => {
                     const style = BADGE_STYLES[badge as BadgeType] || { bg: "rgba(239,68,68,0.25)", text: "#EF4444" };
                     return (
