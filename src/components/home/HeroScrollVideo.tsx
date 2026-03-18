@@ -97,18 +97,21 @@ export function HeroScrollVideo({ videoSrc }: HeroScrollVideoProps) {
           </p>
           <div className="overflow-hidden" role="marquee" aria-label="Logos de clientes">
             <div
-              className="flex gap-10 items-center w-max"
-              style={{ animation: "scroll-left 30s linear infinite" }}
+              className="flex gap-8 items-center w-max"
+              style={{ animation: `scroll-left ${CLIENT_LOGOS.length * 2.5}s linear infinite` }}
             >
               {allLogos.map((logo, i) => (
                 <div
-                  key={`${logo}-${i}`}
-                  className="flex-shrink-0 w-24 h-10 rounded-lg bg-white/[0.06] flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default"
+                  key={`${logo.name}-${i}`}
+                  className="flex-shrink-0 h-10 px-2 flex items-center justify-center opacity-50 hover:opacity-100 transition-all duration-500 cursor-default"
                   aria-hidden={i >= CLIENT_LOGOS.length}
                 >
-                  <span className="text-[10px] font-semibold text-[var(--color-text-muted)] select-none">
-                    {logo}
-                  </span>
+                  <img
+                    src={logo.src}
+                    alt={logo.name}
+                    className="h-8 w-auto object-contain brightness-0 invert"
+                    loading="lazy"
+                  />
                 </div>
               ))}
             </div>
