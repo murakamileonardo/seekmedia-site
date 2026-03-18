@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useInfluencerStore } from "@/hooks/useInfluencerStore";
 import { BADGE_STYLES } from "@/lib/types";
@@ -10,8 +11,12 @@ interface SimilarInfluencersProps {
   currentNiches: string[];
 }
 
+const CARD_WIDTH = 200; // w-[200px]
+const GAP = 20; // gap-5 = 20px
+
 export function SimilarInfluencers({ currentSlug, currentNiches }: SimilarInfluencersProps) {
   const { influencers } = useInfluencerStore();
+  const trackRef = useRef<HTMLDivElement>(null);
   const activeInfluencers = influencers.filter((inf) => inf.active !== false);
 
   // Filter by overlapping niches, exclude current
@@ -24,22 +29,66 @@ export function SimilarInfluencers({ currentSlug, currentNiches }: SimilarInflue
     similar = activeInfluencers.filter((inf) => inf.slug !== currentSlug);
   }
 
+  // Duplicate enough times to guarantee seamless loop
+  // We need at least 2x viewport width of cards
+  const items = useMemo(() => {
+    if (similar.length === 0) return [];
+    const setWidth = similar.length * (CARD_WIDTH + GAP);
+    // Ensure we have at least 3 copies or enough to fill 3000px (generous viewport)
+    const copies = Math.max(3, Math.ceil(3000 / setWidth) + 1);
+    const result = [];
+    for (let c = 0; c < copies; c++) {
+      for (const inf of similar) {
+        result.push({ ...inf, _key: `${inf.slug}-${c}` });
+      }
+    }
+    return result;
+  }, [similar]);
+
+  // Calculate one-set width for the translateX reset point
+  const oneSetWidth = similar.length * (CARD_WIDTH + GAP);
+
+  // Use requestAnimationFrame-based scroll for truly seamless loop
+  const animRef = useRef<number>(0);
+  const offsetRef = useRef(0);
+  const pausedRef = useRef(false);
+
+  useEffect(() => {
+    if (similar.length === 0) return;
+
+    const speed = 0.5; // pixels per frame (~30px/s at 60fps)
+
+    const tick = () => {
+      if (!pausedRef.current && trackRef.current) {
+        offsetRef.current += speed;
+        if (offsetRef.current >= oneSetWidth) {
+          offsetRef.current -= oneSetWidth;
+        }
+        trackRef.current.style.transform = `translateX(-${offsetRef.current}px)`;
+      }
+      animRef.current = requestAnimationFrame(tick);
+    };
+
+    animRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(animRef.current);
+  }, [similar.length, oneSetWidth]);
+
   if (similar.length === 0) return null;
 
-  // Duplicate for seamless infinite scroll
-  const items = [...similar, ...similar];
-
   return (
-    <div className="overflow-hidden pt-2 -mt-2">
+    <div
+      className="overflow-hidden pt-2 -mt-2"
+      onMouseEnter={() => { pausedRef.current = true; }}
+      onMouseLeave={() => { pausedRef.current = false; }}
+    >
       <div
-        className="flex gap-5 w-max pause-on-hover"
-        style={{
-          animation: `scroll-left ${similar.length * 5}s linear infinite`,
-        }}
+        ref={trackRef}
+        className="flex gap-5 will-change-transform"
+        style={{ width: "max-content" }}
       >
-        {items.map((inf, i) => (
+        {items.map((inf) => (
           <Link
-            key={`${inf.slug}-${i}`}
+            key={inf._key}
             href={`/casting/${inf.slug}`}
             className="group shrink-0 w-[200px] rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden hover:border-[var(--color-teal)]/50 transition-all duration-300 hover:-translate-y-1"
           >

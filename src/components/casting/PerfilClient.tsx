@@ -133,7 +133,7 @@ export function PerfilClient({ slug }: { slug: string }) {
         {/* Similar Influencers */}
         <div className="mt-12">
           <h2 className="text-xl font-bold mb-6">
-            Criadores <span className="text-gradient">Similares</span>
+            Outros <span className="text-gradient">Talentos</span>
           </h2>
           <div className="pt-1">
             <SimilarInfluencers currentSlug={influencer.slug} currentNiches={influencer.niches} />
