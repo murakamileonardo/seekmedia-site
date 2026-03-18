@@ -18,13 +18,13 @@ export function LogoCarousel() {
           {allLogos.map((logo, i) => (
             <div
               key={`${logo.name}-${i}`}
-              className="flex-shrink-0 h-12 px-3 flex items-center justify-center opacity-50 hover:opacity-100 transition-all duration-500 cursor-default"
+              className="flex-shrink-0 h-12 flex items-center justify-center opacity-50 hover:opacity-100 transition-all duration-500 cursor-default"
               aria-hidden={i >= CLIENT_LOGOS.length}
             >
               <img
                 src={logo.src}
                 alt={logo.name}
-                className="h-10 w-auto object-contain brightness-0 invert"
+                className="h-full w-auto object-contain brightness-0 invert"
                 loading="lazy"
               />
             </div>
