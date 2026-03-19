@@ -21,7 +21,7 @@ export function SimilarInfluencers({ currentSlug, currentNiches }: SimilarInflue
 
   // Filter by overlapping niches, exclude current
   let similar = activeInfluencers.filter(
-    (inf) => inf.niches.some((n) => currentNiches.includes(n)) && inf.slug !== currentSlug
+    (inf) => Array.isArray(inf.niches) && inf.niches.some((n) => currentNiches.includes(n)) && inf.slug !== currentSlug
   );
 
   // Fallback: if fewer than 3 matches, show all except current

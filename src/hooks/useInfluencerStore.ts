@@ -6,12 +6,21 @@ import { parseFollowerCount, suggestOrder } from "@/lib/types";
 import { ALL_INFLUENCERS } from "@/lib/constants";
 
 const STORAGE_KEY = "seek_influencers_data";
+const STORAGE_VERSION_KEY = "seek_influencers_version";
+const STORAGE_VERSION = "2"; // Bump when influencer schema changes
 
 type StoredInfluencer = Influencer & { _deleted?: boolean };
 
 function loadFromStorage(): Record<string, StoredInfluencer> {
   if (typeof window === "undefined") return {};
   try {
+    // Clear stale data from previous versions to avoid field-mismatch crashes
+    const storedVersion = localStorage.getItem(STORAGE_VERSION_KEY);
+    if (storedVersion !== STORAGE_VERSION) {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.setItem(STORAGE_VERSION_KEY, STORAGE_VERSION);
+      return {};
+    }
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return {};
     return JSON.parse(raw) as Record<string, StoredInfluencer>;

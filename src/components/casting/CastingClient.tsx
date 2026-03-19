@@ -49,6 +49,7 @@ export function CastingClient() {
     return influencers
       .filter((inf) => {
         if (inf.active === false) return false;
+        if (!inf.name || !Array.isArray(inf.niches)) return false; // guard against malformed data
         if (selectedNiches.length > 0 && !inf.niches.some((n) => selectedNiches.includes(n))) return false;
         if (debouncedQuery && !inf.name.toLowerCase().includes(debouncedQuery.toLowerCase())) return false;
         return true;
