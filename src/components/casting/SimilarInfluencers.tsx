@@ -4,7 +4,7 @@ import { useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useInfluencerStore } from "@/hooks/useInfluencerStore";
 import { BADGE_STYLES } from "@/lib/types";
-import type { BadgeType } from "@/lib/types";
+import type { BadgeType, Influencer } from "@/lib/types";
 
 interface SimilarInfluencersProps {
   currentSlug: string;
@@ -30,20 +30,20 @@ export function SimilarInfluencers({ currentSlug, currentNiches }: SimilarInflue
   }
 
   // Duplicate enough times to guarantee seamless loop
-  // We need at least 2x viewport width of cards
+  const similarSlugs = similar.map((i) => i.slug).join(",");
   const items = useMemo(() => {
-    if (similar.length === 0) return [];
+    if (similar.length === 0) return [] as (Influencer & { _key: string })[];
     const setWidth = similar.length * (CARD_WIDTH + GAP);
-    // Ensure we have at least 3 copies or enough to fill 3000px (generous viewport)
     const copies = Math.max(3, Math.ceil(3000 / setWidth) + 1);
-    const result = [];
+    const result: (Influencer & { _key: string })[] = [];
     for (let c = 0; c < copies; c++) {
       for (const inf of similar) {
         result.push({ ...inf, _key: `${inf.slug}-${c}` });
       }
     }
     return result;
-  }, [similar]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [similarSlugs]);
 
   // Calculate one-set width for the translateX reset point
   const oneSetWidth = similar.length * (CARD_WIDTH + GAP);
