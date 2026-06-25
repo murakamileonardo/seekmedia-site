@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { FEATURED_CASES } from "@/lib/constants";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { Button } from "@/components/ui/Button";
 
 export function FeaturedCases() {
   return (
@@ -69,11 +68,6 @@ export function FeaturedCases() {
         ))}
       </div>
 
-      <div className="text-center mt-12">
-        <Button variant="secondary" href="/cases">
-          Ver Todos os Cases
-        </Button>
-      </div>
     </SectionWrapper>
   );
 }
