@@ -61,10 +61,10 @@ export function CastingClient() {
     <SectionWrapper>
       <div className="text-center mb-12 pt-8">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-          Nosso <span className="text-gradient">Casting</span>
+          Nosso <span className="text-gradient">Squad</span>
         </h1>
         <p className="text-[var(--color-text-muted)] max-w-xl mx-auto text-lg">
-          Mais de 500 criadores prontos para conectar sua marca ao público certo
+          Mais de 100 criadores prontos para conectar sua marca ao público certo
         </p>
       </div>
 

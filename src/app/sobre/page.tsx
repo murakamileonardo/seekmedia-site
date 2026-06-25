@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/Button";
 import { TEAM_MEMBERS, VALUES, COUNTERS } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Sobre — SeekMedia",
-  description: "Conheça a SeekMedia: agência de influenciadores e produção audiovisual que conecta marcas aos maiores criadores do Brasil.",
+  title: "Sobre — Seekmedia",
+  description: "Conheça a Seekmedia: agência de influencers, performance e produção audiovisual que conecta marcas aos maiores criadores do Brasil.",
 };
 
 export default function SobrePage() {

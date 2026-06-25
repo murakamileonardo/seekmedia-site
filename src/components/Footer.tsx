@@ -76,13 +76,8 @@ export function Footer() {
             </h4>
             <ul className="space-y-3 text-sm text-[var(--color-text-muted)]">
               <li>
-                <a href="mailto:contato@seekmedia.com.br" className="hover:text-[var(--color-accent-cyan)] transition-colors duration-300">
-                  contato@seekmedia.com.br
-                </a>
-              </li>
-              <li>
-                <a href="tel:+5511999999999" className="hover:text-[var(--color-accent-cyan)] transition-colors duration-300">
-                  +55 (11) 99999-9999
+                <a href="mailto:comercial@seekmedia.io" className="hover:text-[var(--color-accent-cyan)] transition-colors duration-300">
+                  comercial@seekmedia.io
                 </a>
               </li>
               <li>São Paulo, SP — Brasil</li>

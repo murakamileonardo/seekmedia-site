@@ -8,10 +8,8 @@ export const NAV_LINKS = [
 ] as const;
 
 export const SOCIAL_LINKS = [
-  { platform: "Instagram", href: "https://instagram.com/seekmedia", icon: "instagram" },
-  { platform: "TikTok", href: "https://tiktok.com/@seekmedia", icon: "tiktok" },
-  { platform: "LinkedIn", href: "https://linkedin.com/company/seekmedia", icon: "linkedin" },
-  { platform: "YouTube", href: "https://youtube.com/@seekmedia", icon: "youtube" },
+  { platform: "Instagram", href: "https://www.instagram.com/seekmedia.agency/", icon: "instagram" },
+  { platform: "LinkedIn", href: "https://www.linkedin.com/company/seekmedia-agency", icon: "linkedin" },
 ] as const;
 
 export const CLIENT_LOGOS: { name: string; src: string }[] = [
@@ -74,37 +72,37 @@ export const CLIENT_LOGOS: { name: string; src: string }[] = [
 // FEATURED_INFLUENCERS is defined after ALL_INFLUENCERS (see below)
 
 export const COUNTERS = [
-  { value: 17.9, suffix: "M+", label: "Alcance em Impressões", decimals: 1 },
-  { value: 10, suffix: "+", label: "Anos de Experiência" },
-  { value: 500, suffix: "+", label: "Impactos Gerados" },
+  { value: 2, suffix: " Bilhões+", label: "Alcance em Impressões", decimals: 0 },
+  { value: 13, suffix: "+", label: "Anos de Experiência" },
+  { value: 71, suffix: "+", label: "Clientes atendidos" },
 ];
 
 export const FEATURED_CASES = [
   {
-    brand: "Nike",
-    slug: "nike-lancamento-chuteiras",
-    influencer: "Ronaldinho Gaúcho",
-    result: "2M views em 24h",
-    description: "Campanha de lançamento da nova linha de chuteiras com conteúdo exclusivo para Instagram e TikTok.",
-    metric: "2M",
-    metricLabel: "views em 24h",
+    brand: "Itaú",
+    slug: "itau-webserie-itau",
+    influencer: "Você Sabia?",
+    result: "17.9M impressões",
+    description: "Websérie sobre investimento",
+    metric: "17.9M",
+    metricLabel: "impressões",
   },
   {
-    brand: "Natura",
-    slug: "natura-beleza-natural",
-    influencer: "Juliette Freire",
-    result: "+340% engajamento",
-    description: "Série de conteúdos sobre beleza natural que gerou recorde de engajamento para a marca.",
-    metric: "+340%",
-    metricLabel: "engajamento",
+    brand: "Paramount",
+    slug: "paramount-curiosidades-sobre-filmes",
+    influencer: "Você Sabia?",
+    result: "42.8M impressões",
+    description: "Criação de vídeos falando sobre as estréias da Paramount no cinema",
+    metric: "42.8M",
+    metricLabel: "impressões",
   },
   {
-    brand: "iFood",
-    slug: "ifood-live-commerce",
-    influencer: "Casimiro Miguel",
-    result: "5M impressões",
-    description: "Ação de live commerce com integração direta ao app, gerando conversões em tempo real.",
-    metric: "5M",
+    brand: "Amazon",
+    slug: "amazon-echo-dot-alexa",
+    influencer: "Você Sabia?",
+    result: "25.2M impressões",
+    description: "Criação de conteúdo dos dispositivos Echo Dot Alexa",
+    metric: "25.2M",
     metricLabel: "impressões",
   },
 ];
@@ -114,8 +112,8 @@ export const SERVICES = [
     title: "Gestão de Influenciadores",
     description: "Seleção, curadoria e gestão completa de campanhas com os maiores criadores do Brasil. Do briefing ao relatório final.",
     icon: "users",
-    longDescription: "Nossa equipe especializada cuida de todo o processo: desde a identificação dos criadores ideais para sua marca, passando pela negociação e briefing, até o acompanhamento da produção e entrega dos relatórios de performance. Com um casting de mais de 500 influenciadores ativos, encontramos o match perfeito para cada campanha.",
-    features: ["Curadoria personalizada de influenciadores", "Negociação e contratos", "Briefing e acompanhamento criativo", "Relatórios de performance detalhados"],
+    longDescription: "Nossa equipe especializada cuida de todo o processo: desde a identificação dos criadores ideais para sua marca, passando pela negociação e briefing, até o acompanhamento da produção e entrega dos relatórios de performance. Com um squad de mais de 100 influencers ativos, encontramos o match perfeito para cada campanha.",
+    features: ["Curadoria personalizada de influencers", "Negociação e contratos", "Briefing e acompanhamento criativo", "Relatórios de performance detalhados"],
   },
   {
     title: "Produção Audiovisual",
@@ -134,10 +132,10 @@ export const SERVICES = [
 ];
 
 export const TEAM_MEMBERS = [
-  { name: "Ana Silva", role: "CEO & Fundadora", bio: "15 anos de experiência em marketing digital e influência." },
-  { name: "Carlos Mendes", role: "Diretor Criativo", bio: "Ex-diretor de conteúdo em grandes agências de publicidade." },
-  { name: "Mariana Costa", role: "Head de Casting", bio: "Especialista em curadoria e gestão de talentos digitais." },
-  { name: "Rafael Santos", role: "Head de Produção", bio: "Cinegrafista e editor com passagem por grandes emissoras." },
+  { name: "Leonardo Murakami", role: "CVO & Co-founder", bio: "15 anos de experiência em negócios, tecnologia e influência." },
+  { name: "Rafael Ferenczi", role: "CEO & Co-founder", bio: "15 anos liderando áreas comerciais e 5 anos de experiência em marketing e influência." },
+  { name: "Ricardo Ishimaru", role: "Head de Atendimento", bio: "Especialista em curadoria e gestão de campanhas." },
+  { name: "Marcelo Ferenczi", role: "Head de SDR/BDR", bio: "Especialista em estratégias comerciais." },
 ];
 
 export const VALUES = [
@@ -148,7 +146,7 @@ export const VALUES = [
 ];
 
 export const CASTING_FILTERS = {
-  niches: ["Todos", "Esporte", "Lifestyle", "Humor", "Beleza", "Moda", "Entretenimento", "Música", "Tech", "Gastronomia", "Fitness"],
+  niches: ["Todos", "Esporte", "Lifestyle", "Humor", "Beleza", "Gaming", "Entretenimento", "Música", "Tech", "Gastronomia", "Fitness"],
   platforms: ["Todas", "Instagram", "TikTok", "YouTube", "Twitter"],
   sizes: ["Todos", "Nano (10-50K)", "Micro (50-500K)", "Médio (500K-1M)", "Macro (1-10M)", "Mega (10M+)"],
 };
@@ -221,57 +219,54 @@ export const FEATURED_INFLUENCERS = FEATURED_SLUGS.map(
 
 export const ALL_CASES = [
   {
-    brand: "Nike",
-    slug: "nike-lancamento-chuteiras",
-    influencer: "Ronaldinho Gaúcho",
-    result: "2M views em 24h",
-    description: "Campanha de lançamento da nova linha de chuteiras com conteúdo exclusivo para Instagram e TikTok.",
-    longDescription: "A Nike buscava um lançamento impactante para sua nova linha de chuteiras. Desenvolvemos uma estratégia de conteúdo exclusivo com Ronaldinho Gaúcho, criando uma série de vídeos que mostravam o ícone do futebol testando os novos produtos em cenários icônicos. A campanha gerou viralização orgânica massiva.",
-    metric: "2M",
-    metricLabel: "views em 24h",
-    platforms: ["Instagram", "TikTok"],
-    duration: "2 semanas",
+    brand: "Itaú",
+    slug: "itau-webserie-itau",
+    influencer: "Você Sabia?",
+    result: "17.9M impressões",
+    description: "Websérie sobre investimento",
+    longDescription: "Conscientização do público para a importância de investir, ensinando princípios básicos de investimento e orientando para as melhores modalidades disponíveis.",
+    metric: "17.9M",
+    metricLabel: "impressões",
+    platforms: ["YouTube", "Instagram"],
+    duration: "3 meses",
     results: [
-      { label: "Views totais", value: "8.5M" },
-      { label: "Engajamento", value: "+420%" },
-      { label: "Menções à marca", value: "15.2K" },
-      { label: "Cliques no link", value: "340K" },
+      { label: "Impressões", value: "17.9M" },
+      { label: "Views Totais", value: "1.1M" },
+      { label: "Interações", value: "120K" },
     ],
   },
   {
-    brand: "Natura",
-    slug: "natura-beleza-natural",
-    influencer: "Juliette Freire",
-    result: "+340% engajamento",
-    description: "Série de conteúdos sobre beleza natural que gerou recorde de engajamento para a marca.",
-    longDescription: "Para a Natura, criamos uma campanha focada em autenticidade e beleza natural com Juliette Freire. A série de conteúdos mostrava a rotina de cuidados da influenciadora usando produtos Natura, com um tom genuíno que ressoou profundamente com seu público.",
-    metric: "+340%",
-    metricLabel: "engajamento",
-    platforms: ["Instagram", "YouTube"],
+    brand: "Paramount",
+    slug: "paramount-curiosidades-sobre-filmes",
+    influencer: "Você Sabia?",
+    result: "42.8M impressões",
+    description: "Criação de vídeos falando sobre as estréias da Paramount no cinema",
+    longDescription: "Criação de vídeos falando sobre as estréias no cinema do Missão Impossível 7, Top Gun 2, Sonic 2 e Dungeons & Dragons. Conteúdo falando sobre fatos interessantes dos filmes e curiosidades, instigando a audiência e gerando interesse em irem aos cinemas assistir.",
+    metric: "42.8M",
+    metricLabel: "impressões",
+    platforms: ["YouTube", "Instagram"],
+    duration: "3 anos",
+    results: [
+      { label: "Impressões", value: "42.8M" },
+      { label: "Views Totais", value: "2.5M" },
+      { label: "Interações", value: "212K" },
+    ],
+  },
+  {
+    brand: "Amazon",
+    slug: "amazon-echo-dot-alexa",
+    influencer: "Você Sabia?",
+    result: "25.2M impressões",
+    description: "Criação de conteúdo dos dispositivos Echo Dot Alexa",
+    longDescription: "Criação de conteúdo com tom bem humorado demonstrando uso dos dispositivos Echo Dot Alexa em um dia de produção de conteúdo na vida de um influenciador, conectando a audiência com o produto.",
+    metric: "25.2M",
+    metricLabel: "impressões",
+    platforms: ["YouTube", "Instagram"],
     duration: "1 mês",
     results: [
-      { label: "Engajamento", value: "+340%" },
-      { label: "Alcance", value: "12M" },
-      { label: "Salvamentos", value: "890K" },
-      { label: "Conversões", value: "+180%" },
-    ],
-  },
-  {
-    brand: "iFood",
-    slug: "ifood-live-commerce",
-    influencer: "Casimiro Miguel",
-    result: "5M impressões",
-    description: "Ação de live commerce com integração direta ao app, gerando conversões em tempo real.",
-    longDescription: "O iFood queria explorar o formato de live commerce no Brasil. Desenvolvemos uma ação com Casimiro Miguel que integrava diretamente o app do iFood durante a transmissão ao vivo, permitindo que os espectadores fizessem pedidos em tempo real enquanto assistiam ao conteúdo.",
-    metric: "5M",
-    metricLabel: "impressões",
-    platforms: ["YouTube", "TikTok"],
-    duration: "1 semana",
-    results: [
-      { label: "Impressões", value: "5M" },
-      { label: "Pedidos na live", value: "23K" },
-      { label: "Pico de audiência", value: "185K" },
-      { label: "ROI", value: "4.2x" },
+      { label: "Impressões", value: "25.2M" },
+      { label: "Views Totais", value: "2.1M" },
+      { label: "Interações", value: "222K" },
     ],
   },
 ];

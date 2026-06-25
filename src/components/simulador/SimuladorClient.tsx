@@ -50,6 +50,7 @@ type Mode = "marca" | "influenciador";
 
 // ── All platforms in alphabetical order ──
 const ALL_PLATFORMS: { key: keyof PlatformFlags; label: string }[] = [
+  { key: "facebook", label: "Facebook" },
   { key: "instagram", label: "Instagram" },
   { key: "kick", label: "KICK" },
   { key: "kwai", label: "Kwai" },

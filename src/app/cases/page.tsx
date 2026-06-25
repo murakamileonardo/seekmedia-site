@@ -5,8 +5,8 @@ import { GradientBar } from "@/components/ui/GradientBar";
 import { ALL_CASES } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Cases de Sucesso — SeekMedia",
-  description: "Conheça os resultados reais das campanhas de influência da SeekMedia. Cases com métricas e resultados comprovados.",
+  title: "Cases de Sucesso — Seekmedia",
+  description: "Conheça os resultados reais das campanhas de influência da Seekmedia. Cases com métricas e resultados comprovados.",
 };
 
 export default function CasesPage() {

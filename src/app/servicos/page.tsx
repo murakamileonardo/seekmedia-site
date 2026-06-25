@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/Button";
 import { SERVICES } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Serviços — SeekMedia",
-  description: "Conheça os serviços da SeekMedia: gestão de influenciadores, produção audiovisual e estratégia de campanhas.",
+  title: "Serviços - Seekmedia",
+  description: "Conheça os serviços da Seekmedia: gestão de influenciadores, produção audiovisual e estratégia de campanhas.",
 };
 
 const SERVICE_ICONS: Record<string, React.ReactNode> = {

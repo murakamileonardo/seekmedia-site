@@ -28,12 +28,12 @@ export function Hero() {
           do Brasil
         </h1>
         <p className="text-base sm:text-lg md:text-xl text-[var(--color-text-muted)] max-w-2xl mb-10 leading-relaxed">
-          Somos uma agência criada por influenciadores, para influenciadores.
+          Somos uma agência criada por influencers, para influencers.
           Estratégia, criatividade e resultados que transformam.
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
           <Button variant="primary" size="lg" href="/casting">
-            Conheça Nosso Casting
+            Conheça Nossos Influencers
           </Button>
           <Button variant="secondary" size="lg" href="/contato">
             Quero um Orçamento
@@ -44,7 +44,7 @@ export function Hero() {
       {/* Client Logo Carousel */}
       <div className="pb-16">
         <p className="text-center text-[10px] sm:text-xs text-[var(--color-text-muted)] uppercase tracking-widest mb-4 font-medium">
-          Marcas que confiam na SeekMedia
+          Marcas que confiam na Seekmedia
         </p>
         <div className="overflow-hidden" role="marquee" aria-label="Logos de clientes">
           <div

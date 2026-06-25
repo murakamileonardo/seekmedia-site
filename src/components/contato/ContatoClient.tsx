@@ -78,7 +78,7 @@ export function ContatoClient() {
           </h2>
           <p className="text-[var(--color-text-muted)] text-lg">
             Recebemos sua mensagem e entraremos em contato em breve.
-            Obrigado pelo interesse na SeekMedia!
+            Obrigado pelo interesse na Seekmedia!
           </p>
         </div>
       </SectionWrapper>
@@ -141,7 +141,7 @@ export function ContatoClient() {
                 value={form.email}
                 onChange={(v) => update("email", v)}
                 required
-                placeholder="seu@email.com"
+                placeholder="comercial@seekmedia.io"
               />
             </div>
 
@@ -151,7 +151,7 @@ export function ContatoClient() {
                 type="tel"
                 value={form.phone}
                 onChange={(v) => update("phone", v)}
-                placeholder="(11) 99999-9999"
+                placeholder=""
               />
               <InputField
                 label={form.type === "influenciador" ? "@ principal" : "Empresa"}
@@ -201,16 +201,7 @@ export function ContatoClient() {
                     </svg>
                   }
                   label="E-mail"
-                  value="contato@seekmedia.com.br"
-                />
-                <InfoItem
-                  icon={
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
-                    </svg>
-                  }
-                  label="Telefone"
-                  value="+55 (11) 9999-9999"
+                  value="comercial@seekmedia.io"
                 />
                 <InfoItem
                   icon={

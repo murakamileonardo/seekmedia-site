@@ -31,7 +31,7 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
                 {(
                   [
                     { key: "overview" as const, label: "Visão Geral" },
-                    { key: "influencers" as const, label: "Casting" },
+                    { key: "influencers" as const, label: "Squad" },
                     { key: "deals" as const, label: "Deals" },
                   ] as const
                 ).map((t) => (
@@ -73,7 +73,7 @@ function OverviewTab() {
   const { influencers } = useInfluencerStore();
 
   const stats = [
-    { label: "Influenciadores no Casting", value: influencers.length, color: "#00F0D0" },
+    { label: "Influenciadores no Squad", value: influencers.length, color: "#00F0D0" },
     { label: "Cases Registrados", value: ALL_CASES.length, color: "#80F090" },
     { label: "Deals Ativos", value: 5, color: "#D0F060" },
     { label: "Propostas Pendentes", value: 3, color: "#E0F050" },
@@ -138,7 +138,7 @@ function InfluencersTab() {
   };
 
   const handleDelete = (slug: string, name: string) => {
-    if (window.confirm(`Tem certeza que deseja excluir "${name}" do casting?`)) {
+    if (window.confirm(`Tem certeza que deseja excluir "${name}" do squad?`)) {
       deleteInfluencer(slug);
     }
   };
@@ -156,7 +156,7 @@ function InfluencersTab() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">Gestão do Casting</h2>
+        <h2 className="text-lg font-semibold">Gestão do Squad</h2>
         <button
           onClick={handleAdd}
           className="px-4 py-2 rounded-full text-xs font-medium bg-[var(--color-accent-cyan)]/20 text-[var(--color-accent-cyan)] border border-[var(--color-accent-cyan)]/50 cursor-pointer hover:bg-[var(--color-accent-cyan)]/30 transition-colors"

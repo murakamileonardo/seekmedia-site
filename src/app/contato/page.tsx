@@ -4,9 +4,9 @@ import { GradientBar } from "@/components/ui/GradientBar";
 import { ContatoClient } from "@/components/contato/ContatoClient";
 
 export const metadata: Metadata = {
-  title: "Contato — SeekMedia",
+  title: "Contato - Seekmedia",
   description:
-    "Entre em contato com a SeekMedia. Solicite um orçamento para sua campanha de influência ou candidate-se ao nosso casting.",
+    "Entre em contato com a Seekmedia. Solicite um orçamento para sua campanha de influência ou candidate-se ao nosso casting.",
 };
 
 export default function ContatoPage() {

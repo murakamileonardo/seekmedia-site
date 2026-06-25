@@ -10,10 +10,10 @@ export function CastingGrid() {
     <SectionWrapper id="casting">
       <div className="text-center mb-12">
         <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-          Nosso <span className="text-gradient">Casting</span>
+          Nossos <span className="text-gradient">Influencers</span>
         </h2>
         <p className="text-[var(--color-text-muted)] max-w-xl mx-auto">
-          Conheça alguns dos criadores que fazem parte do nosso portfólio exclusivo
+          Conheça alguns dos criadores que fazem parte do nosso squad
         </p>
       </div>
 
@@ -97,7 +97,7 @@ export function CastingGrid() {
 
       <div className="text-center mt-12">
         <Button variant="secondary" href="/casting">
-          Ver Casting Completo
+          Ver Squad Completo
         </Button>
       </div>
     </SectionWrapper>

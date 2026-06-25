@@ -4,9 +4,9 @@ import { GradientBar } from "@/components/ui/GradientBar";
 import { SimuladorClient } from "@/components/simulador/SimuladorClient";
 
 export const metadata: Metadata = {
-  title: "Simulador de Campanhas — SeekMedia",
+  title: "Simulador de Campanhas - Seekmedia",
   description:
-    "Simule sua campanha de influência ou descubra seu potencial como criador de conteúdo. Ferramenta interativa da SeekMedia.",
+    "Simule sua campanha de influência ou descubra seu potencial como criador de conteúdo. Ferramenta interativa da Seekmedia.",
 };
 
 export default function SimuladorPage() {

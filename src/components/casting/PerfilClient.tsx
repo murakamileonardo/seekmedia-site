@@ -31,7 +31,7 @@ export function PerfilClient({ slug }: { slug: string }) {
         <GradientBar />
         <SectionWrapper>
           <div className="max-w-4xl mx-auto pt-8 text-center py-32">
-            <h1 className="text-2xl font-bold text-[var(--color-text)] mb-4">Influenciador não encontrado</h1>
+            <h1 className="text-2xl font-bold text-[var(--color-text)] mb-4">Influencer não encontrado</h1>
             <p className="text-[var(--color-text-muted)] mb-8">Este perfil não existe ou foi removido.</p>
             <Button variant="primary" href="/casting">Voltar ao Casting</Button>
           </div>

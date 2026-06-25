@@ -20,8 +20,8 @@ export function FinalCTA() {
             <span className="text-gradient">próximo nível</span>?
           </h2>
           <p className="text-[var(--color-text-muted)] max-w-2xl mx-auto mb-12 text-lg">
-            Seja você uma marca buscando influenciadores ou um criador querendo crescer,
-            a SeekMedia tem a solução ideal.
+            Seja você uma marca buscando influencers ou um criador querendo crescer,
+            a Seekmedia tem a solução ideal.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
@@ -48,9 +48,9 @@ export function FinalCTA() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold mb-2">Sou Influenciador</h3>
+              <h3 className="text-lg font-semibold mb-2">Sou Influencer</h3>
               <p className="text-sm text-[var(--color-text-muted)] mb-6">
-                Faça parte do casting e conecte-se com grandes marcas
+                Faça parte do nosso squad e conecte-se com grandes marcas
               </p>
               <Button variant="secondary" size="md" href="/contato">
                 Quero Fazer Parte

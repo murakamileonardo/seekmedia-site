@@ -25,6 +25,7 @@ export type Prazo = "urgente" | "normal" | "planejado";
 export type Abrangencia = "nada-nichado" | "pouco-nichado" | "nichado" | "muito-nichado";
 
 export interface PlatformFlags {
+  facebook: boolean;
   instagram: boolean;
   kick: boolean;
   kwai: boolean;
@@ -789,7 +790,7 @@ export function getLiveConclusion(inputs: InfluencerInputs): LiveConclusion | nu
 
 // ── Default Inputs ──
 export const DEFAULT_PLATFORMS: PlatformFlags = {
-  instagram: true, kick: false, kwai: false, tiktok: false,
+  facebook: false, instagram: true, kick: false, kwai: false, tiktok: false,
   tiktokLive: false, twitch: false, twitter: false, youtube: false, youtubeLive: false,
 };
 
